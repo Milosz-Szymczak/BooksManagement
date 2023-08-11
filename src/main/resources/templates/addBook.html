@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Books management - Add Book</title>
+</head>
+<body>
+    <header>
+        <h1>Form to add Book - Admin</h1>
+        <nav>
+            <a href="management.html" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
+            <a href="addBook.html" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
+          <a href="/">Shop</a>
+          <a href="/login">Log in</a>
+          <a href="/singup">Sing up</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container mt-5">
+        <h2>Dodaj nową książkę</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Tytuł:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Wprowadź tytuł książki" required>
+            </div>
+            <div class="form-group">
+                <label for="publisher">Wydawca:</label>
+                <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Wprowadź wydawcę książki" required>
+            </div>
+            <div class="form-group">
+                <label for="author">Autor:</label>
+                <input type="text" class="form-control" id="author" name="author" placeholder="Wprowadź autora książki" required>
+            </div>
+            <div class="form-group">
+                <label for="kind">Rodzaj:</label>
+                <input type="text" class="form-control" id="kind" name="kind" placeholder="Wprowadź rodzaj książki" required>
+            </div>
+            <div class="form-group">
+                <label for="releaseDate">Data wydania:</label>
+                <input type="date" class="form-control" id="releaseDate" name="releaseDate" required>
+            </div>
+            <div class="form-group">
+                <label for="isbn">ISBN:</label>
+                <input type="number" class="form-control" id="isbn" name="isbn" placeholder="Wprowadź numer ISBN" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Dodaj książkę</button>
+        </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>Miłosz Szymczak</p>
+    </footer>
+</body>
+</html>
