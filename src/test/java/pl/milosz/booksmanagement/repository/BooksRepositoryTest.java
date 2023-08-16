@@ -25,7 +25,7 @@ class BooksRepositoryTest {
 
     @BeforeEach
     public void init() {
-        book = Book.builder().name("Clean Code").publisher("Helion").author("Martin Robert C.")
+        book = Book.builder().title("Clean Code").publisher("Helion").author("Martin Robert C.")
                 .kind("Computer Science").releaseDate("2009-03-01").isbn(9780132350884L).build();
     }
 
@@ -34,7 +34,7 @@ class BooksRepositoryTest {
         Book savedBook = booksRepository.save(book);
 
         Assertions.assertThat(savedBook).isNotNull();
-        Assertions.assertThat(savedBook.getName()).isEqualTo("Clean Code");
+        Assertions.assertThat(savedBook.getTitle()).isEqualTo("Clean Code");
     }
 
     @Test

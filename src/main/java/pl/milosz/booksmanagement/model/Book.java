@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @Data
 @Entity
@@ -17,8 +20,8 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "book_name", nullable = false )
-    private String name;
+    @Column(name = "title", nullable = false )
+    private String title;
 
     @Column(name = "publisher", nullable = false )
     private String publisher;
