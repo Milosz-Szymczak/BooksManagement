@@ -15,8 +15,8 @@
     <header>
         <h1>Form to add Book - Admin</h1>
         <nav>
-            <a th:href="@{/management}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
-            <a th:href="@{/addBook}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
+            <a th:href="@{/management-book}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
+            <a th:href="@{/form-add-book}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
             <a href="/">Shop</a>
             <a href="/login">Log in</a>
             <a href="/singup">Sing up</a>
@@ -26,7 +26,7 @@
     <main>
         <div class="container mt-5">
         <h2>Add new book</h2>
-        <form th:action="@{/books}" th:object="${book}" method="post">
+        <form th:action="@{/form-add-book}" th:object="${book}" method="post">
             <div class="form-group">
                 <label for="name">Title:</label>
                 <input th:field="*{title}" type="text" class="form-control" id="name" name="name" placeholder="Enter a book title" required>

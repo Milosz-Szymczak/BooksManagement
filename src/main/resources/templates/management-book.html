@@ -15,8 +15,8 @@
     <header>
         <h1>Books Management - Admin</h1>
         <nav>
-            <a th:href="@{/management}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
-            <a th:href="@{/addBook}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
+            <a th:href="@{/management-book}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
+            <a th:href="@{/form-add-book}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
           <a href="/">Shop</a>
           <a href="/login">Log in</a>
           <a href="/singup">Sing up</a>
@@ -35,9 +35,9 @@
                         <th> Kind </th>
                         <th> Release Date </th>
                         <th> ISBN </th>
+                        <th> Update/Delete </th>
                     </tr>
                     </thead>
-
                     <tbody>
                     <tr th:each = "book: ${books}">
                         <td><img src="/img/cleancode.jpg" alt="Book Cover"></td>
@@ -47,6 +47,11 @@
                         <td th:text = "${book.kind}"></td>
                         <td th:text = "${book.releaseDate}"></td>
                         <td th:text = "${book.isbn}"></td>
+                        <td>
+                            <a th:href="@{/form-update-book/{id}(id=${book.id})}" class="btn btn-primary" style="background-color: green;">Update Book</a>
+                            <br>
+                            <a th:href="@{/book/delete/{id}(id=${book.id})}" class="btn btn-primary" style="background-color: red;">Delete Book</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
