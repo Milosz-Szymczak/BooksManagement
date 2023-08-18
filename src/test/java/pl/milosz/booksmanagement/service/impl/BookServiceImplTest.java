@@ -14,6 +14,7 @@ import pl.milosz.booksmanagement.repository.BooksRepository;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,7 +35,7 @@ class BookServiceImplTest {
                 .kind("Computer Science").releaseDate("2009-03-01").isbn(9780132350884L).build();
     }
     @Test
-    void saveBook_returnVoid() {
+    void saveBook_returnBook() {
         when(booksRepository.save(Mockito.any(Book.class))).thenReturn(book);
 
         Book addedBook = bookServiceImpl.saveBook(book);
@@ -67,7 +68,7 @@ class BookServiceImplTest {
     }
 
     @Test
-    void updateBook_returnVoid() {
+    void updateBook_returnBook() {
         when(booksRepository.save(Mockito.any(Book.class))).thenReturn(book);
 
         Book addedBook = bookServiceImpl.saveBook(book);
@@ -75,5 +76,14 @@ class BookServiceImplTest {
         Assertions.assertThat(addedBook).isNotNull();
         Assertions.assertThat(addedBook.getTitle()).isEqualTo("Clean Code");
         verify(booksRepository).save(book);
+    }
+
+    @Test
+    void deleteBook_returnVoid() {
+        when(booksRepository.findById(book.getId())).thenReturn(Optional.ofNullable(book));
+
+        assertAll(() -> bookServiceImpl.deleteBook(book.getId()));
+
+        verify(booksRepository).findById(book.getId());
     }
 }
