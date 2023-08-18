@@ -12,6 +12,7 @@ import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.repository.BooksRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,7 +34,7 @@ class BookServiceImplTest {
                 .kind("Computer Science").releaseDate("2009-03-01").isbn(9780132350884L).build();
     }
     @Test
-    void saveBook_returnBook() {
+    void saveBook_returnVoid() {
         when(booksRepository.save(Mockito.any(Book.class))).thenReturn(book);
 
         Book addedBook = bookServiceImpl.saveBook(book);
@@ -52,5 +53,27 @@ class BookServiceImplTest {
         List<Book> allBooks = bookServiceImpl.getAllBook();
         Assertions.assertThat(allBooks.size()).isEqualTo(2);
         verify(booksRepository).findAll();
+    }
+
+    @Test
+    void getBookById_returnBook() {
+        when(booksRepository.findById(book.getId())).thenReturn(Optional.ofNullable(book));
+
+        Book bookById = bookServiceImpl.getBookById(book.getId());
+
+        Assertions.assertThat(bookById).isEqualTo(book);
+        Assertions.assertThat(bookById.getTitle()).isEqualTo("Clean Code");
+        verify(booksRepository).findById(book.getId());
+    }
+
+    @Test
+    void updateBook_returnVoid() {
+        when(booksRepository.save(Mockito.any(Book.class))).thenReturn(book);
+
+        Book addedBook = bookServiceImpl.saveBook(book);
+
+        Assertions.assertThat(addedBook).isNotNull();
+        Assertions.assertThat(addedBook.getTitle()).isEqualTo("Clean Code");
+        verify(booksRepository).save(book);
     }
 }
