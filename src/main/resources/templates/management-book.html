@@ -48,9 +48,11 @@
                         <td th:text = "${book.releaseDate}"></td>
                         <td th:text = "${book.isbn}"></td>
                         <td>
-                            <a th:href="@{/form-update-book/{id}(id=${book.id})}" class="btn btn-primary" style="background-color: green;">Update Book</a>
+                            <a th:href="@{/form-update-book/{id}(id=${book.id})}"
+                               class="btn btn-primary" style="background-color: green;">Update Book</a>
                             <br>
-                            <a th:href="@{/book/delete/{id}(id=${book.id})}" class="btn btn-primary" style="background-color: red;">Delete Book</a>
+                            <a th:href="@{/delete/{id}(id=${book.id})}"
+                               class="btn btn-danger" >Delete Book</a>
                         </td>
                     </tr>
                     </tbody>
