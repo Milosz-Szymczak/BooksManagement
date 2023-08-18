@@ -24,24 +24,6 @@ public class ManagementController {
         return "management-book";
     }
 
-    @GetMapping("/form-add-book")
-    public String createBookForm(Model model) {
-        model.addAttribute("book", new Book());
-        return "form-add-book";
-    }
-
-    @PostMapping("/form-add-book")
-    public String saveBook(@ModelAttribute("book") Book book) {
-        bookService.saveBook(book);
-        return "redirect:/management-book";
-    }
-
-    @GetMapping("/form-update-book/{id}")
-    public String editBook(@PathVariable Long id, Model model) {
-        model.addAttribute("book", bookService.getBookById(id));
-        return "form-update-book";
-    }
-
     @PostMapping("/form-update-book/{id}")
     public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book, Model model) {
         Book existBook = bookService.getBookById(id);
@@ -55,4 +37,28 @@ public class ManagementController {
         bookService.updateBook(existBook);
         return "redirect:/management-book";
     }
+    @GetMapping("/form-update-book/{id}")
+    public String editBook(@PathVariable Long id, Model model) {
+        model.addAttribute("book", bookService.getBookById(id));
+        return "form-update-book";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable Long id, Model model) {
+        bookService.deleteBook(id);
+        return "redirect:/management-book";
+    }
+
+    @GetMapping("/form-add-book")
+    public String createBookForm(Model model) {
+        model.addAttribute("book", new Book());
+        return "form-add-book";
+    }
+
+    @PostMapping("/form-add-book")
+    public String saveBook(@ModelAttribute("book") Book book) {
+        bookService.saveBook(book);
+        return "redirect:/management-book";
+    }
+
 }
