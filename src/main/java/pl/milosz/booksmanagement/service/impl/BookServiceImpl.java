@@ -6,11 +6,12 @@ import pl.milosz.booksmanagement.repository.BooksRepository;
 import pl.milosz.booksmanagement.service.BookService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
 
-    private BooksRepository booksRepository;
+    private final BooksRepository booksRepository;
 
     public BookServiceImpl(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
@@ -24,6 +25,16 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getAllBook() {
         return booksRepository.findAll();
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+        return booksRepository.findById(id).get();
+    }
+
+    @Override
+    public Book updateBook(Book book) {
+        return booksRepository.save(book);
     }
 
 
