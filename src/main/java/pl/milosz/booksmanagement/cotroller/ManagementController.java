@@ -2,9 +2,7 @@ package pl.milosz.booksmanagement.cotroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.service.BookService;
 
@@ -13,28 +11,48 @@ import java.util.List;
 @Controller
 public class ManagementController {
 
-    private BookService bookService;
+    private final BookService bookService;
 
     public ManagementController(BookService bookService) {
         this.bookService = bookService;
     }
 
-    @GetMapping("/management")
-    public String management(Model model) {
+    @GetMapping("/management-book")
+    public String listBook(Model model) {
         List<Book> allBook = bookService.getAllBook();
         model.addAttribute("books", allBook);
-        return "management";
+        return "management-book";
     }
 
-    @GetMapping("/addBook")
-    public String saveBook(Model model) {
+    @GetMapping("/form-add-book")
+    public String createBookForm(Model model) {
         model.addAttribute("book", new Book());
-        return "addBook";
+        return "form-add-book";
     }
 
-    @PostMapping("/books")
+    @PostMapping("/form-add-book")
     public String saveBook(@ModelAttribute("book") Book book) {
         bookService.saveBook(book);
-        return "management";
+        return "redirect:/management-book";
+    }
+
+    @GetMapping("/form-update-book/{id}")
+    public String editBook(@PathVariable Long id, Model model) {
+        model.addAttribute("book", bookService.getBookById(id));
+        return "form-update-book";
+    }
+
+    @PostMapping("/form-update-book/{id}")
+    public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book, Model model) {
+        Book existBook = bookService.getBookById(id);
+        existBook.setTitle(book.getTitle());
+        existBook.setAuthor(book.getAuthor());
+        existBook.setKind(book.getKind());
+        existBook.setIsbn(book.getIsbn());
+        existBook.setPublisher(book.getPublisher());
+        existBook.setReleaseDate(book.getReleaseDate());
+
+        bookService.updateBook(existBook);
+        return "redirect:/management-book";
     }
 }
