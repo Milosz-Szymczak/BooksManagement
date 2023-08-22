@@ -18,7 +18,7 @@ public class ManagementController {
     }
 
     @GetMapping("/management-book")
-    public String listBook(Model model) {
+    public String getAllBook(Model model) {
         List<Book> allBook = bookService.getAllBook();
         model.addAttribute("books", allBook);
         return "management-book";
@@ -37,6 +37,7 @@ public class ManagementController {
         bookService.updateBook(existBook);
         return "redirect:/management-book";
     }
+
     @GetMapping("/form-update-book/{id}")
     public String editBook(@PathVariable Long id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));
