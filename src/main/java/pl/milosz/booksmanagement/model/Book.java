@@ -37,4 +37,7 @@ public class Book {
 
     @Column(name = "isbn", nullable = false )
     private long isbn;
+
+    @Column(name = "amount", nullable = false )
+    private int amount;
 }
