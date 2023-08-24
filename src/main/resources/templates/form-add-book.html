@@ -17,9 +17,9 @@
         <nav>
             <a th:href="@{/management-book}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
             <a th:href="@{/form-add-book}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
-            <a href="/">Shop</a>
+            <a th:href="@{/shop}">Shop</a>
             <a href="/login">Log in</a>
-            <a href="/singup">Sing up</a>
+            <a href="/sing-up">Sing up</a>
         </nav>
     </header>
 
@@ -50,6 +50,10 @@
             <div class="form-group">
                 <label for="isbn">ISBN:</label>
                 <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn" placeholder="Enter number ISBN" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input th:field="*{amount}" type="number" class="form-control" id="amount" name="isbn" placeholder="Enter the number of books" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Add Book</button>

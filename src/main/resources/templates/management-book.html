@@ -17,9 +17,9 @@
         <nav>
             <a th:href="@{/management-book}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
             <a th:href="@{/form-add-book}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
-          <a href="/">Shop</a>
+            <a th:href="@{/shop}">Shop</a>
           <a href="/login">Log in</a>
-          <a href="/singup">Sing up</a>
+          <a href="/sing-up">Sing up</a>
         </nav>
     </header>
 
@@ -35,6 +35,7 @@
                         <th> Kind </th>
                         <th> Release Date </th>
                         <th> ISBN </th>
+                        <th> Amount </th>
                         <th> Update/Delete </th>
                     </tr>
                     </thead>
@@ -47,6 +48,7 @@
                         <td th:text = "${book.kind}"></td>
                         <td th:text = "${book.releaseDate}"></td>
                         <td th:text = "${book.isbn}"></td>
+                        <td th:text = "${book.amount}"></td>
                         <td>
                             <a th:href="@{/form-update-book/{id}(id=${book.id})}"
                                class="btn btn-primary" style="background-color: green;">Update Book</a>
