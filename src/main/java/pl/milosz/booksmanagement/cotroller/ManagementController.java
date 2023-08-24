@@ -33,6 +33,7 @@ public class ManagementController {
         existBook.setIsbn(book.getIsbn());
         existBook.setPublisher(book.getPublisher());
         existBook.setReleaseDate(book.getReleaseDate());
+        existBook.setAmount(book.getAmount());
 
         bookService.updateBook(existBook);
         return "redirect:/management-book";
@@ -60,6 +61,13 @@ public class ManagementController {
     public String saveBook(@ModelAttribute("book") Book book) {
         bookService.saveBook(book);
         return "redirect:/management-book";
+    }
+
+    @GetMapping("/shop")
+    public String getShopTemplate(Model model) {
+        List<Book> allBook = bookService.getAllBook();
+        model.addAttribute("books", allBook);
+        return "shop";
     }
 
 }
