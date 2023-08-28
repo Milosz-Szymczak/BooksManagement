@@ -63,11 +63,9 @@ public class ManagementController {
         return "redirect:/management-book";
     }
 
-    @GetMapping("/shop")
-    public String getShopTemplate(Model model) {
-        List<Book> allBook = bookService.getAllBook();
-        model.addAttribute("books", allBook);
-        return "shop";
+    @GetMapping("/form-google-api")
+    public String getTest(Model model) {
+        return "form-google-api";
     }
 
 }
