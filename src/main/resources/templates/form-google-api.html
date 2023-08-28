@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Search Book - Google Books API</title>
+</head>
+<body>
+<header>
+    <h1>Search Book - Google Books API</h1>
+    <nav>
+        <a th:href="@{/management-book}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
+        <a th:href="@{/form-add-book}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
+        <a th:href="@{/form-google-api}">Search Book - Google Books API</a>
+        <a th:href="@{/profil}">My Profile</a>
+        <a th:href="@{/login}">Log in</a>
+        <a th:href="@{/sing-up}">Sing up</a>
+    </nav>
+</header>
+
+<main>
+    <div class ="container">
+        <form th:action="@{/form-search-book}"  method="post">
+            <div class="form-group">
+                <label for="name">Link:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter a book title" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search Book</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>Miłosz Szymczak</p>
+</footer>
+</body>
+</html>
