@@ -20,24 +20,24 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "title", nullable = false )
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "publisher", nullable = false )
+    @Column(name = "publisher", nullable = false)
     private String publisher;
 
-    @Column(name = "author", nullable = false )
+    @Column(name = "author", nullable = false)
     private String author;
 
-    @Column(name = "kind_of_book", nullable = false )
+    @Column(name = "kind_of_book", nullable = false)
     private String kind;
 
     @Column(name = "release_date", nullable = false, length = 10)
     private String releaseDate;
 
-    @Column(name = "isbn", nullable = false )
+    @Column(name = "isbn", nullable = false)
     private long isbn;
 
-    @Column(name = "amount", nullable = false )
-    private int amount;
+    @Column(name = "confirm", nullable = false)
+    private boolean confirm;
 }
