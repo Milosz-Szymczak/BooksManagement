@@ -4,66 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
-    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
 
     <title>Books management - Add Book</title>
 </head>
 <body>
-    <header>
-        <h1>Form to add Book - Admin</h1>
-        <nav>
-            <a th:href="@{/management-book}" style="color: rgb(96, 9, 9);">Books Management - Admin</a>
-            <a th:href="@{/form-add-book}" style="color: rgb(96, 9, 9);">Form to add Book - Admin</a>
-            <a th:href="@{/form-google-api}">Search Book - Google Books API</a>
-            <a th:href="@{/profil}">My Profile</a>
-            <a th:href="@{/login}">Log in</a>
-            <a th:href="@{/sing-up}">Sing up</a>
-        </nav>
-    </header>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/management-check-book-admin}" style="background-color: red; !important;">Books to be confirmed - Admin</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/management-book-admin}" style="background-color: red; !important;">Management
+                        Books - Admin</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/added-books}">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/form-google-api}">Search Book - Google Books API</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/form-add-book}">Add Book</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item"><a class="nav-link" th:href="@{/profil}">My Profile</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/sign-up}">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/log-on}">Log on</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <div class="container mt-5">
+<main>
+    <div class="container mt-5">
         <h2>Add new book</h2>
         <form th:action="@{/form-add-book}" th:object="${book}" method="post">
             <div class="form-group">
                 <label for="name">Title:</label>
-                <input th:field="*{title}" type="text" class="form-control" id="name" name="name" placeholder="Enter a book title" required>
+                <input th:field="*{title}" type="text" class="form-control" id="name" name="name"
+                       placeholder="Enter a book title" required>
             </div>
             <div class="form-group">
                 <label for="publisher">Publisher:</label>
-                <input th:field="*{publisher}" type="text" class="form-control" id="publisher" name="publisher" placeholder="Enter a publisher" required>
+                <input th:field="*{publisher}" type="text" class="form-control" id="publisher" name="publisher"
+                       placeholder="Enter a publisher" required>
             </div>
             <div class="form-group">
                 <label for="author">Author:</label>
-                <input th:field="*{author}" type="text" class="form-control" id="author" name="author" placeholder="Enter author" required>
+                <input th:field="*{author}" type="text" class="form-control" id="author" name="author"
+                       placeholder="Enter author" required>
             </div>
             <div class="form-group">
                 <label for="kind">Kind:</label>
-                <input th:field="*{kind}" type="text" class="form-control" id="kind" name="kind" placeholder="Enter kind" required>
+                <input th:field="*{kind}" type="text" class="form-control" id="kind" name="kind"
+                       placeholder="Enter kind" required>
             </div>
             <div class="form-group">
                 <label for="releaseDate">Release date:</label>
-                <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate" name="releaseDate" required>
+                <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate" name="releaseDate"
+                       required>
             </div>
             <div class="form-group">
                 <label for="isbn">ISBN:</label>
-                <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn" placeholder="Enter number ISBN" required>
-            </div>
-            <div class="form-group">
-                <label for="amount">Amount:</label>
-                <input th:field="*{amount}" type="number" class="form-control" id="amount" name="isbn" placeholder="Enter the number of books" required>
+                <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn"
+                       placeholder="Enter number ISBN" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Add Book</button>
         </form>
-        </div>
-    </main>
+    </div>
+</main>
 
-    <footer>
-        <p>Miłosz Szymczak</p>
-    </footer>
+<footer>
+    <p>Miłosz Szymczak</p>
+</footer>
 </body>
 </html>
