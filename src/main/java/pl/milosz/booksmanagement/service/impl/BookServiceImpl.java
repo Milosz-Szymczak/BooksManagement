@@ -19,12 +19,22 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book saveBook(Book book) {
+        book.setConfirm(false);
         return booksRepository.save(book);
     }
 
     @Override
-    public List<Book> getAllBook() {
-        return booksRepository.findAll();
+    public List<Book> getBooksWithoutConfirm() {
+        List<Book> allBooks = booksRepository.findAll();
+        allBooks.removeIf(Book::isConfirm);
+        return allBooks;
+    }
+
+    @Override
+    public List<Book> getBooksWithConfirm() {
+        List<Book> allBooks = booksRepository.findAll();
+        allBooks.removeIf(book -> !book.isConfirm());
+        return allBooks;
     }
 
     @Override
@@ -42,6 +52,4 @@ public class BookServiceImpl implements BookService {
         Book bookById = getBookById(id);
         booksRepository.delete(bookById);
     }
-
-
 }
