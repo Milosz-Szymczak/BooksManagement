@@ -5,8 +5,7 @@ import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.repository.BooksRepository;
 import pl.milosz.booksmanagement.service.BookService;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -52,4 +51,4 @@ public class BookServiceImpl implements BookService {
         Book bookById = getBookById(id);
         booksRepository.delete(bookById);
     }
-}
+    }
