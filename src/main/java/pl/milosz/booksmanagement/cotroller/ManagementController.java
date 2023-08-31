@@ -1,18 +1,12 @@
 package pl.milosz.booksmanagement.cotroller;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.service.BookService;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.List;
 
 @Controller
@@ -58,7 +52,7 @@ public class ManagementController {
     public String getAllConfirmBooks(Model model) {
         List<Book> allBook = bookService.getBooksWithConfirm();
         if (allBook.isEmpty()) {
-           model.addAttribute("book", new Book());
+            model.addAttribute("book", new Book());
         } else {
             model.addAttribute("books", allBook);
         }
@@ -103,34 +97,4 @@ public class ManagementController {
         return "redirect:/added-books";
     }
 
-    @GetMapping("/form-google-api")
-    public String getTest(Model model) {
-        return "form-google-api";
-    }
-
-    @PostMapping("/form-search-book")
-    public String redirectToUrl(@RequestParam("name") URL name) throws IOException {
-        try (InputStream input = name.openStream()) {
-            InputStreamReader isr = new InputStreamReader(input);
-            BufferedReader reader = new BufferedReader(isr);
-            StringBuilder json = new StringBuilder();
-            String t;
-            int c;
-            while ((c = reader.read()) != -1) {
-                json.append((char) c);
-            }
-            reader.close();
-            isr.close();
-
-            t = json.toString();
-
-            JsonObject jsonObject = JsonParser.parseString(t).getAsJsonObject();
-
-            String title = jsonObject.getAsJsonObject("volumeInfo").get("title").getAsString();
-
-            System.out.println(title);
-
-        }
-        return "form-google-api";
-    }
 }
