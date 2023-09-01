@@ -17,5 +17,5 @@ public class GoogleBookDto {
     private ArrayList<String> authors;
     private String publishedDate;
     private String id;
-    private Long isbn;
+    private String isbn;
 }

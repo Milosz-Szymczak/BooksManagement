@@ -55,17 +55,21 @@ public class GoogleBookServiceImpl implements GoogleBookService {
                     } else {
                         bookSubTitle = "not exist";
                     }
-                    JSONArray authors = volumeInfo.getJSONArray("authors");
                     ArrayList<String> bookAuthors = new ArrayList<>();
-                    for (int j = 0; j < authors.length(); j++) {
-                        bookAuthors.add(authors.getString(j));
+                    if (volumeInfo.has("authors")) {
+                        JSONArray authors = volumeInfo.getJSONArray("authors");
+                        for (int j = 0; j < authors.length(); j++) {
+                            bookAuthors.add(authors.getString(j));
+                        }
+                    } else {
+                        bookAuthors.add("not exist");
                     }
                     JSONArray identifiersArray = volumeInfo.getJSONArray("industryIdentifiers");
-                    Long isbn10Identifier = null;
+                    String isbn10Identifier = null;
                     for (int j = 0; j < identifiersArray.length(); j++) {
                         JSONObject identifierObject = identifiersArray.getJSONObject(j);
                         if ("ISBN_10".equals(identifierObject.getString("type"))) {
-                            isbn10Identifier = identifierObject.getLong("identifier");
+                            isbn10Identifier = identifierObject.getString("identifier");
                             break;
                         }
                     }
@@ -82,10 +86,6 @@ public class GoogleBookServiceImpl implements GoogleBookService {
             e.printStackTrace();
         }
 
-
-        for (Map.Entry<String, GoogleBookDto> entry: allGoogleBooks.entrySet()) {
-            System.out.println(entry);
-        }
         return allGoogleBooks;
     }
 }
