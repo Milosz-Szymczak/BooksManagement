@@ -4,6 +4,7 @@ package pl.milosz.booksmanagement.cotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.service.BookService;
 
@@ -20,7 +21,7 @@ public class ManagementController {
 
     @GetMapping("/management-check-book-admin")
     public String getBooksForCheck(Model model) {
-        List<Book> allBook = bookService.getBooksWithoutConfirm();
+        List<BookDto> allBook = bookService.getBooksWithoutConfirm();
         if (allBook.isEmpty()) {
             model.addAttribute("book", new Book());
         } else {
@@ -31,7 +32,7 @@ public class ManagementController {
 
     @GetMapping("/confirm-book/{id}")
     public String confirmBook(@PathVariable Long id, @ModelAttribute("book") Book book, Model model) {
-        Book bookById = bookService.getBookById(id);
+        BookDto bookById = bookService.getBookById(id);
         bookById.setConfirm(true);
         bookService.updateBook(bookById);
         return "redirect:/management-check-book-admin";
@@ -39,7 +40,7 @@ public class ManagementController {
 
     @GetMapping("/management-book-admin")
     public String getAllConfirmBooksForAdmin(Model model) {
-        List<Book> allBook = bookService.getBooksWithConfirm();
+        List<BookDto> allBook = bookService.getBooksWithConfirm();
         if (allBook.isEmpty()) {
             model.addAttribute("book", new Book());
         } else {
@@ -50,7 +51,7 @@ public class ManagementController {
 
     @GetMapping("/added-books")
     public String getAllConfirmBooks(Model model) {
-        List<Book> allBook = bookService.getBooksWithConfirm();
+        List<BookDto> allBook = bookService.getBooksWithConfirm();
         if (allBook.isEmpty()) {
             model.addAttribute("book", new Book());
         } else {
@@ -67,7 +68,7 @@ public class ManagementController {
 
     @PostMapping("/form-update-book/{id}")
     public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book, Model model) {
-        Book existBook = bookService.getBookById(id);
+        BookDto existBook = bookService.getBookById(id);
         existBook.setTitle(book.getTitle());
         existBook.setAuthor(book.getAuthor());
         existBook.setKind(book.getKind());
@@ -92,8 +93,8 @@ public class ManagementController {
     }
 
     @PostMapping("/form-add-book")
-    public String saveBook(@ModelAttribute("book") Book book) {
-        bookService.saveBook(book);
+    public String saveBook(@ModelAttribute("book") BookDto bookDto) {
+        bookService.saveBook(bookDto);
         return "redirect:/added-books";
     }
 

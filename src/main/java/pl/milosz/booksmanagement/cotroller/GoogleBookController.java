@@ -41,6 +41,7 @@ public class GoogleBookController {
         Map<String, GoogleBookDto> allGoogleBooks = googleBookService.getAllGoogleBooks(titleWithoutSpace);
 
         List<BookEntryDto> bookEntries = new ArrayList<>();
+
         for (Map.Entry<String, GoogleBookDto> entry : allGoogleBooks.entrySet()) {
             bookEntries.add(new BookEntryDto(entry.getKey(), entry.getValue()));
         }

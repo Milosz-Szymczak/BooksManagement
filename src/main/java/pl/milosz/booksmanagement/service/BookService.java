@@ -1,20 +1,21 @@
 package pl.milosz.booksmanagement.service;
 
 import org.springframework.stereotype.Service;
+import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.Book;
 
 import java.util.List;
 
 @Service
 public interface BookService {
-    Book saveBook(Book book);
+    BookDto saveBook(BookDto bookDto);
 
-    List<Book> getBooksWithoutConfirm();
-    List<Book> getBooksWithConfirm();
+    List<BookDto> getBooksWithoutConfirm();
+    List<BookDto> getBooksWithConfirm();
 
-    Book getBookById(Long id);
+    BookDto getBookById(Long id);
 
-    Book updateBook(Book book);
+    BookDto updateBook(BookDto bookDto);
 
     void deleteBook(Long id);
 }

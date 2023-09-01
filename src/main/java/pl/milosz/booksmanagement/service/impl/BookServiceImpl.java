@@ -1,11 +1,14 @@
 package pl.milosz.booksmanagement.service.impl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.repository.BooksRepository;
 import pl.milosz.booksmanagement.service.BookService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -17,38 +20,72 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book saveBook(Book book) {
-        book.setConfirm(false);
-        return booksRepository.save(book);
+    public BookDto saveBook(BookDto bookDto) {
+        bookDto.setConfirm(false);
+        Book book = new Book();
+        BeanUtils.copyProperties(bookDto,book);
+        booksRepository.save(book);
+        return bookDto;
     }
 
     @Override
-    public List<Book> getBooksWithoutConfirm() {
+    public List<BookDto> getBooksWithoutConfirm() {
         List<Book> allBooks = booksRepository.findAll();
-        allBooks.removeIf(Book::isConfirm);
-        return allBooks;
+
+        List<BookDto> allBooksDto = allBooks.stream()
+                        .filter(book ->!book.isConfirm())
+                        .map(this::mapToBookDto)
+                        .collect(Collectors.toList());
+
+        return allBooksDto;
     }
 
     @Override
-    public List<Book> getBooksWithConfirm() {
+    public List<BookDto> getBooksWithConfirm() {
         List<Book> allBooks = booksRepository.findAll();
-        allBooks.removeIf(book -> !book.isConfirm());
-        return allBooks;
+
+        List<BookDto> allBooksDto = allBooks.stream()
+                .filter(Book::isConfirm)
+                .map(this::mapToBookDto)
+                .collect(Collectors.toList());
+
+        return allBooksDto;
     }
 
     @Override
-    public Book getBookById(Long id) {
-        return booksRepository.findById(id).get();
+    public BookDto getBookById(Long id) {
+        Book book = booksRepository.findById(id).get();
+        BookDto bookDto = new BookDto();
+        BeanUtils.copyProperties(book, bookDto);
+        return bookDto;
     }
 
     @Override
-    public Book updateBook(Book book) {
-        return booksRepository.save(book);
+    public BookDto updateBook(BookDto bookDto) {
+        Book book = new Book();
+        BeanUtils.copyProperties(bookDto, book);
+        booksRepository.save(book);
+        return bookDto;
     }
 
     @Override
     public void deleteBook(Long id) {
-        Book bookById = getBookById(id);
-        booksRepository.delete(bookById);
+        BookDto bookById = getBookById(id);
+        Book book = new Book();
+        BeanUtils.copyProperties(bookById, book);
+        booksRepository.delete(book);
     }
+
+    private BookDto mapToBookDto(Book book) {
+        BookDto bookDto = new BookDto();
+        bookDto.setId(book.getId());
+        bookDto.setTitle(book.getTitle());
+        bookDto.setPublisher(book.getPublisher());
+        bookDto.setAuthor(book.getAuthor());
+        bookDto.setKind(book.getKind());
+        bookDto.setReleaseDate(book.getReleaseDate());
+        bookDto.setIsbn(book.getIsbn());
+        bookDto.setConfirm(book.isConfirm());
+        return bookDto;
     }
+}
