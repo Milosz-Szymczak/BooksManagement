@@ -11,9 +11,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class BookServiceImpl implements BookService{
 
     private final BooksRepository booksRepository;
+
 
     public BookServiceImpl(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
@@ -85,6 +86,7 @@ public class BookServiceImpl implements BookService {
         bookDto.setKind(book.getKind());
         bookDto.setReleaseDate(book.getReleaseDate());
         bookDto.setIsbn(book.getIsbn());
+        bookDto.setLanguage(book.getLanguage());
         bookDto.setConfirm(book.isConfirm());
         return bookDto;
     }
