@@ -73,6 +73,7 @@ public class ManagementController {
         existBook.setAuthor(book.getAuthor());
         existBook.setKind(book.getKind());
         existBook.setIsbn(book.getIsbn());
+        existBook.setLanguage(book.getLanguage());
         existBook.setPublisher(book.getPublisher());
         existBook.setReleaseDate(book.getReleaseDate());
 

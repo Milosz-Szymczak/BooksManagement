@@ -3,7 +3,7 @@ package pl.milosz.booksmanagement.service.impl;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
-import pl.milosz.booksmanagement.dto.GoogleBookDto;
+import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
 import pl.milosz.booksmanagement.service.GoogleBookService;
 
 import java.io.BufferedReader;
@@ -65,6 +65,7 @@ public class GoogleBookServiceImpl implements GoogleBookService {
                         bookAuthors.add("not exist");
                     }
                     JSONArray identifiersArray = volumeInfo.getJSONArray("industryIdentifiers");
+                    String languageBook = volumeInfo.getString("language");
                     String isbn10Identifier = null;
                     for (int j = 0; j < identifiersArray.length(); j++) {
                         JSONObject identifierObject = identifiersArray.getJSONObject(j);
@@ -75,7 +76,7 @@ public class GoogleBookServiceImpl implements GoogleBookService {
                     }
                     String bookPublisherDate = volumeInfo.getString("publishedDate");
 
-                    allGoogleBooks.put(bookID, new GoogleBookDto(bookTitle, bookSubTitle, bookAuthors, bookPublisherDate, bookID, isbn10Identifier));
+                    allGoogleBooks.put(bookID, new GoogleBookDto(bookID, bookTitle, bookSubTitle, bookAuthors, bookPublisherDate, isbn10Identifier, languageBook));
                 }
             } else {
                 System.out.println("Błąd podczas pobierania danych: " + responseCode);

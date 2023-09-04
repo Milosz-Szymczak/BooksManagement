@@ -52,6 +52,7 @@
                 <th> Author</th>
                 <th> Release Date</th>
                 <th> ISBN</th>
+                <th> Language</th>
                 <th> Action</th>
             </tr>
             </thead>
@@ -63,6 +64,7 @@
                 <td th:text="${entry.value.authors}"></td>
                 <td th:text="${entry.value.publishedDate}"></td>
                 <td th:text="${entry.value.isbn}"></td>
+                <td th:text="${entry.value.language}"></td>
                 <td>
                     <a th:href="@{/book-to-check/{key}(id=${entry.key})}"
                        class="btn btn-success">Confirm Book to check</a>

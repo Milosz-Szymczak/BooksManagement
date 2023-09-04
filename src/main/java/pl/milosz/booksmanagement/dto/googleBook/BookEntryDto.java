@@ -1,4 +1,4 @@
-package pl.milosz.booksmanagement.dto;
+package pl.milosz.booksmanagement.dto.googleBook;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

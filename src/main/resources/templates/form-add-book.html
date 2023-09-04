@@ -76,6 +76,11 @@
                 <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn"
                        placeholder="Enter number ISBN" required>
             </div>
+            <div class="form-group">
+                <label for="isbn">Language:</label>
+                <input th:field="*{language}" type="text" class="form-control" id="language" name="language"
+                       placeholder="Enter language of the book" required>
+            </div>
             <br>
             <button type="submit" class="btn btn-primary">Add Book</button>
         </form>

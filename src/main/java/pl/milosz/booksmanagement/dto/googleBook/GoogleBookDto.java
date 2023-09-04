@@ -1,4 +1,4 @@
-package pl.milosz.booksmanagement.dto;
+package pl.milosz.booksmanagement.dto.googleBook;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +12,11 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Builder
 public class GoogleBookDto {
+    private String id;
     private String title;
     private String subTitle;
     private ArrayList<String> authors;
     private String publishedDate;
-    private String id;
     private String isbn;
+    private String language;
 }

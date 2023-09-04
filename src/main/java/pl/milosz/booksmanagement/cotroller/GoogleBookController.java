@@ -2,13 +2,10 @@ package pl.milosz.booksmanagement.cotroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.milosz.booksmanagement.dto.BookEntryDto;
-import pl.milosz.booksmanagement.dto.GoogleBookDto;
+import pl.milosz.booksmanagement.dto.googleBook.BookEntryDto;
+import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
 import pl.milosz.booksmanagement.service.GoogleBookService;
 
 import java.io.IOException;
@@ -24,12 +21,14 @@ public class GoogleBookController {
     public GoogleBookController(GoogleBookService googleBookService) {
         this.googleBookService = googleBookService;
     }
+
     @GetMapping("/form-google-api")
     public String getTest() {
         return "form-google-api";
     }
+
     @PostMapping("/form-search-book/")
-    public String redirectToUrl(@RequestParam("title") String title, RedirectAttributes redirectAttributes){
+    public String redirectToUrl(@RequestParam("title") String title, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("title", title);
         return "redirect:/google-books";
     }
@@ -50,4 +49,8 @@ public class GoogleBookController {
         return "google-books";
     }
 
+//    @GetMapping("/book-to-check/{key}")
+//    public String sendGoogleBookToCheck(@PathVariable("key") String key) {
+//
+//    }
 }

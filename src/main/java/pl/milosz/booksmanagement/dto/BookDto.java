@@ -17,5 +17,6 @@ public class BookDto {
     private String kind;
     private String releaseDate;
     private long isbn;
+    private String language;
     private boolean confirm;
 }

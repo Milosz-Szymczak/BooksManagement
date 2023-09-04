@@ -38,6 +38,9 @@ public class Book {
     @Column(name = "isbn", nullable = false)
     private long isbn;
 
+    @Column(name = "language", nullable = false)
+    private String language;
+
     @Column(name = "confirm", nullable = false)
     private boolean confirm;
 }

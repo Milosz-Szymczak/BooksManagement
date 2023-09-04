@@ -52,6 +52,7 @@
             <th> Kind</th>
             <th> Release Date</th>
             <th> ISBN</th>
+            <th> Language</th>
             <th> Action</th>
         </tr>
         </thead>
@@ -64,6 +65,7 @@
             <td th:text="${book.kind}"></td>
             <td th:text="${book.releaseDate}"></td>
             <td th:text="${book.isbn}"></td>
+            <td th:text="${book.language}"></td>
             <td>
                 <a th:href="@{/form-update-book/{id}(id=${book.id})}"
                    class="btn btn-warning">Update Book</a>
