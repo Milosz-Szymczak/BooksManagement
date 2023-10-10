@@ -32,11 +32,11 @@ public class Book {
     @Column(name = "kind_of_book", nullable = false)
     private String kind;
 
-    @Column(name = "release_date", nullable = false, length = 10)
+    @Column(name = "release_date", nullable = false)
     private String releaseDate;
 
     @Column(name = "isbn", nullable = false)
-    private long isbn;
+    private String isbn;
 
     @Column(name = "language", nullable = false)
     private String language;
