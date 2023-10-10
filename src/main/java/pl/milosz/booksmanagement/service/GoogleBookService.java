@@ -1,7 +1,7 @@
 package pl.milosz.booksmanagement.service;
 
 import org.springframework.stereotype.Service;
-import pl.milosz.booksmanagement.dto.GoogleBookDto;
+import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
 
 import java.io.IOException;
 import java.util.Map;
