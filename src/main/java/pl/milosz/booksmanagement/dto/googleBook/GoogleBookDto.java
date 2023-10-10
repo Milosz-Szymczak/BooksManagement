@@ -15,6 +15,7 @@ public class GoogleBookDto {
     private String id;
     private String title;
     private String subTitle;
+    private String publisher;
     private ArrayList<String> authors;
     private String publishedDate;
     private String isbn;
