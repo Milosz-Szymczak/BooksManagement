@@ -66,8 +66,8 @@
                 <td th:text="${entry.value.isbn}"></td>
                 <td th:text="${entry.value.language}"></td>
                 <td>
-                    <a th:href="@{/book-to-check/{key}(id=${entry.key})}"
-                       class="btn btn-success">Confirm Book to check</a>
+                    <a th:href="@{/book-to-check/{key}(key=${entry.key})}"
+                       class="btn btn-success">Add book</a>
                 </td>
             </tr>
             </tbody>
