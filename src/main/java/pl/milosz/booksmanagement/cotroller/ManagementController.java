@@ -5,10 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.milosz.booksmanagement.dto.BookDto;
+import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
 import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.service.BookService;
+import pl.milosz.booksmanagement.service.GoogleBookService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ManagementController {
@@ -28,6 +32,35 @@ public class ManagementController {
             model.addAttribute("books", allBook);
         }
         return "management-check-book-admin";
+    }
+    @GetMapping("/book-to-check/{key}")
+    public String sendGoogleBookToCheck(@PathVariable String key, Model model) {
+        System.out.println(key);
+        GoogleBookDto googleBookDto;
+        BookDto bookDto = new BookDto();
+        for (String entry : GoogleBookController.allGoogleBooks.keySet()) {
+            if (entry.equals(key)) {
+                googleBookDto = GoogleBookController.allGoogleBooks.get(entry);
+                String title = googleBookDto.getTitle() + googleBookDto.getSubTitle();
+                bookDto.setTitle(title);
+                bookDto.setPublisher(googleBookDto.getPublisher());
+
+                ArrayList<String> authorsFromGoogle = googleBookDto.getAuthors();
+                StringBuilder authors = new StringBuilder();
+                for (String s : authorsFromGoogle) {
+                    authors.append(s);
+                    authors.append(" ");
+                }
+                bookDto.setAuthor(String.valueOf(authors));
+                bookDto.setKind("Unknown");
+                bookDto.setReleaseDate(googleBookDto.getPublishedDate());
+                bookDto.setIsbn(googleBookDto.getIsbn());
+                bookDto.setLanguage(googleBookDto.getLanguage());
+                bookDto.setConfirm(false);
+            }
+        }
+        model.addAttribute("book", bookDto);
+        return "form-add-book";
     }
 
     @GetMapping("/confirm-book/{id}")
