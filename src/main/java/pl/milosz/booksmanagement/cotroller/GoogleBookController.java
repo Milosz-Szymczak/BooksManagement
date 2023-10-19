@@ -22,6 +22,8 @@ public class GoogleBookController {
         this.googleBookService = googleBookService;
     }
 
+    protected static Map<String, GoogleBookDto> allGoogleBooks;
+
     @GetMapping("/form-google-api")
     public String getTest() {
         return "form-google-api";
@@ -37,7 +39,7 @@ public class GoogleBookController {
     public String getAllGoogleBooks(Model model, @ModelAttribute("title") String title) throws IOException {
         String titleWithoutSpace = title.replaceAll("\\s", "");
 
-        Map<String, GoogleBookDto> allGoogleBooks = googleBookService.getAllGoogleBooks(titleWithoutSpace);
+        allGoogleBooks = googleBookService.getAllGoogleBooks(titleWithoutSpace);
 
         List<BookEntryDto> bookEntries = new ArrayList<>();
 
@@ -48,9 +50,4 @@ public class GoogleBookController {
         model.addAttribute("bookEntries", bookEntries);
         return "google-books";
     }
-
-//    @GetMapping("/book-to-check/{key}")
-//    public String sendGoogleBookToCheck(@PathVariable("key") String key) {
-//
-//    }
 }
