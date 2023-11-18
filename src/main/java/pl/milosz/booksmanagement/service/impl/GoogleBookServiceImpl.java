@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
+import pl.milosz.booksmanagement.exception.HttpConnectionException;
 import pl.milosz.booksmanagement.service.GoogleBookService;
 
 import java.io.BufferedReader;
@@ -28,8 +29,8 @@ public class GoogleBookServiceImpl implements GoogleBookService {
             searchGoogleBook(connection, allGoogleBooks);
 
             connection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HttpConnectionException | IOException e) {
+            throw new HttpConnectionException("Error while communicating with API Google");
         }
         return allGoogleBooks;
     }
@@ -42,7 +43,7 @@ public class GoogleBookServiceImpl implements GoogleBookService {
 
             getAllBooks(items, allGoogleBooks);
         } else {
-            System.out.println("Błąd podczas pobierania danych: " + responseCode);
+            throw new HttpConnectionException("Error during data retrieval from API Google. Response code: " + responseCode);
         }
     }
 
