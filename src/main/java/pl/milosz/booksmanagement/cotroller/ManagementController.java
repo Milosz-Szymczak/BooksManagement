@@ -8,11 +8,9 @@ import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
 import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.service.BookService;
-import pl.milosz.booksmanagement.service.GoogleBookService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ManagementController {
@@ -35,7 +33,6 @@ public class ManagementController {
     }
     @GetMapping("/book-to-check/{key}")
     public String sendGoogleBookToCheck(@PathVariable String key, Model model) {
-        System.out.println(key);
         GoogleBookDto googleBookDto;
         BookDto bookDto = new BookDto();
         for (String entry : GoogleBookController.allGoogleBooks.keySet()) {
@@ -64,7 +61,7 @@ public class ManagementController {
     }
 
     @GetMapping("/confirm-book/{id}")
-    public String confirmBook(@PathVariable Long id, @ModelAttribute("book") Book book, Model model) {
+    public String confirmBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
         BookDto bookById = bookService.getBookById(id);
         bookById.setConfirm(true);
         bookService.updateBook(bookById);
@@ -100,7 +97,7 @@ public class ManagementController {
     }
 
     @PostMapping("/form-update-book/{id}")
-    public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book, Model model) {
+    public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
         BookDto existBook = bookService.getBookById(id);
         existBook.setTitle(book.getTitle());
         existBook.setAuthor(book.getAuthor());
@@ -115,7 +112,7 @@ public class ManagementController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable Long id, Model model) {
+    public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return "redirect:/management-book-admin";
     }
