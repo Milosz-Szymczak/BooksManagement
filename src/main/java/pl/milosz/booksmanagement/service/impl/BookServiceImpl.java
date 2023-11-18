@@ -21,36 +21,31 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public BookDto saveBook(BookDto bookDto) {
+    public void saveBook(BookDto bookDto) {
         bookDto.setConfirm(false);
         Book book = new Book();
         BeanUtils.copyProperties(bookDto,book);
         booksRepository.save(book);
-        return bookDto;
     }
 
     @Override
     public List<BookDto> getBooksWithoutConfirm() {
         List<Book> allBooks = booksRepository.findAll();
 
-        List<BookDto> allBooksDto = allBooks.stream()
+        return allBooks.stream()
                         .filter(book ->!book.isConfirm())
                         .map(this::mapToBookDto)
                         .collect(Collectors.toList());
-
-        return allBooksDto;
     }
 
     @Override
     public List<BookDto> getBooksWithConfirm() {
         List<Book> allBooks = booksRepository.findAll();
 
-        List<BookDto> allBooksDto = allBooks.stream()
+        return allBooks.stream()
                 .filter(Book::isConfirm)
                 .map(this::mapToBookDto)
                 .collect(Collectors.toList());
-
-        return allBooksDto;
     }
 
     @Override
@@ -62,11 +57,10 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public BookDto updateBook(BookDto bookDto) {
+    public void updateBook(BookDto bookDto) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDto, book);
         booksRepository.save(book);
-        return bookDto;
     }
 
     @Override
