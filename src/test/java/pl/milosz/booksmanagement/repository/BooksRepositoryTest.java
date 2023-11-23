@@ -26,7 +26,7 @@ class BooksRepositoryTest {
     @BeforeEach
     public void init() {
         book = Book.builder().title("Clean Code").publisher("Helion").author("Martin Robert C.")
-                .kind("Computer Science").releaseDate("2009-03-01").isbn(9780132350884L).build();
+                .kind("Computer Science").releaseDate("2009-03-01").isbn("9780132350884").language("pl").confirm(true).build();
     }
 
     @Test
