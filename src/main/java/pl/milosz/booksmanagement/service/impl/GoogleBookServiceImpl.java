@@ -83,6 +83,8 @@ public class GoogleBookServiceImpl implements GoogleBookService {
             String languageBook = volumeInfo.has("language") ? volumeInfo.getString("language") : "";
             String bookPublisherDate = volumeInfo.has("publishedDate") ? volumeInfo.getString("publishedDate") : "";
 
+            JSONObject imageLinks = volumeInfo.has("imageLinks") ? volumeInfo.getJSONObject("imageLinks") : new JSONObject();
+            String imageLink = imageLinks.has("thumbnail") ? imageLinks.getString("thumbnail") : "";
             ArrayList<String> bookAuthors = new ArrayList<>();
             JSONArray authors = volumeInfo.has("authors") ? volumeInfo.getJSONArray("authors") : new JSONArray();
             if (!authors.isEmpty()) {
@@ -93,7 +95,7 @@ public class GoogleBookServiceImpl implements GoogleBookService {
 
             String isbn = getISBN(volumeInfo);
 
-            allGoogleBooks.put(bookID, new GoogleBookDto(bookID, bookTitle, bookSubTitle, publisher,
+            allGoogleBooks.put(bookID, new GoogleBookDto(imageLink, bookTitle, bookSubTitle, publisher,
                     bookAuthors, bookPublisherDate, isbn, languageBook));
         }
     }
