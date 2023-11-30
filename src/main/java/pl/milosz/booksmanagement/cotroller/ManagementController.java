@@ -71,6 +71,7 @@ public class ManagementController {
     @PostMapping("/form-update-book/{id}")
     public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
         BookDto existBook = bookService.getBookById(id);
+        existBook.setImageLink(book.getImageLink());
         existBook.setTitle(book.getTitle());
         existBook.setAuthor(book.getAuthor());
         existBook.setKind(book.getKind());
