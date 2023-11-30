@@ -46,6 +46,11 @@
     <div class="container mt-5">
         <h2>Update book</h2>
         <form th:action="@{/form-update-book/{id}(id=${book.id})}" th:object="${book}" method="post">
+            <img th:src="${book.imageLink}">
+            <div class="form-group">
+                <label for="name">Image Link:</label>
+                <input th:field="*{imageLink}" type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Enter image link">
+            </div>
             <div class="form-group">
                 <label for="name">Title:</label>
                 <input th:field="*{title}" type="text" class="form-control" id="name" name="name"

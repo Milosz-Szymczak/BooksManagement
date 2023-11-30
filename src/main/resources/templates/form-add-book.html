@@ -46,6 +46,11 @@
     <div class="container mt-5">
         <h2>Add new book</h2>
         <form th:action="@{/form-add-book}" th:object="${book}" method="post">
+            <img th:src="${book.imageLink}">
+            <div class="form-group">
+                <label for="name">Image Link:</label>
+                <input th:field="*{imageLink}" type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Enter image link">
+            </div>
             <div class="form-group">
                 <label for="name">Title:</label>
                 <input th:field="*{title}" type="text" class="form-control" id="name" name="name"
@@ -59,7 +64,7 @@
             <div class="form-group">
                 <label for="author">Author:</label>
                 <input th:field="*{author}" type="text" class="form-control" id="author" name="author"
-                       placeholder="Enter author" required>
+                       placeholder="Enter author">
             </div>
             <div class="form-group">
                 <label for="kind">Kind:</label>
@@ -68,13 +73,12 @@
             </div>
             <div class="form-group">
                 <label for="releaseDate">Release date:</label>
-                <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate" name="releaseDate"
-                       required>
+                <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate" name="releaseDate">
             </div>
             <div class="form-group">
                 <label for="isbn">ISBN:</label>
                 <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn"
-                       placeholder="Enter number ISBN" required>
+                       placeholder="Enter number ISBN">
             </div>
             <div class="form-group">
                 <label for="isbn">Language:</label>
