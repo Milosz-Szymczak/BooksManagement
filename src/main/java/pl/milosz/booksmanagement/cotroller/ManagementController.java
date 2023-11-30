@@ -31,34 +31,6 @@ public class ManagementController {
         }
         return "management-check-book-admin";
     }
-    @GetMapping("/book-to-check/{key}")
-    public String sendGoogleBookToCheck(@PathVariable String key, Model model) {
-        GoogleBookDto googleBookDto;
-        BookDto bookDto = new BookDto();
-        for (String entry : GoogleBookController.allGoogleBooks.keySet()) {
-            if (entry.equals(key)) {
-                googleBookDto = GoogleBookController.allGoogleBooks.get(entry);
-                String title = googleBookDto.getTitle() + googleBookDto.getSubTitle();
-                bookDto.setTitle(title);
-                bookDto.setPublisher(googleBookDto.getPublisher());
-
-                ArrayList<String> authorsFromGoogle = googleBookDto.getAuthors();
-                StringBuilder authors = new StringBuilder();
-                for (String s : authorsFromGoogle) {
-                    authors.append(s);
-                    authors.append(" ");
-                }
-                bookDto.setAuthor(String.valueOf(authors));
-                bookDto.setKind("Unknown");
-                bookDto.setReleaseDate(googleBookDto.getPublishedDate());
-                bookDto.setIsbn(googleBookDto.getIsbn());
-                bookDto.setLanguage(googleBookDto.getLanguage());
-                bookDto.setConfirm(false);
-            }
-        }
-        model.addAttribute("book", bookDto);
-        return "form-add-book";
-    }
 
     @GetMapping("/confirm-book/{id}")
     public String confirmBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
@@ -128,5 +100,4 @@ public class ManagementController {
         bookService.saveBook(bookDto);
         return "redirect:/added-books";
     }
-
 }
