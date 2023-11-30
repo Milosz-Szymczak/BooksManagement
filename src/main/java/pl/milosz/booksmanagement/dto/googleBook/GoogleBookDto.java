@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Builder
 public class GoogleBookDto {
-    private String id;
+    private String imageLink;
     private String title;
     private String subTitle;
     private String publisher;
