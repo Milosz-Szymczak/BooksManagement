@@ -70,6 +70,7 @@ public class GoogleBookController {
                     authors.append(" ");
                 }
 
+                bookDto.setImageLink(googleBookDto.getImageLink());
                 bookDto.setPublisher(googleBookDto.getPublisher());
                 bookDto.setAuthor(String.valueOf(authors));
                 bookDto.setKind("Unknown");
