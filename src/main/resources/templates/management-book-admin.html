@@ -58,7 +58,12 @@
         </thead>
         <tbody>
         <tr th:each="book: ${books}">
-            <td><img src="/img/cleancode.jpg" alt="Book Cover"></td>
+            <td>
+                <div th:if="${not #strings.isEmpty(book.imageLink)}"> <img th:src="${book.imageLink}" alt="Book Cover">
+                </div>
+                <div th:if="${#strings.isEmpty(book.imageLink)}"> <img src="/img/iconBook.jpg" alt="Book Cover">
+                </div>
+            </td>
             <td th:text="${book.title}"></td>
             <td th:text="${book.publisher}"></td>
             <td th:text="${book.author}"></td>

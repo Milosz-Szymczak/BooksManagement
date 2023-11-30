@@ -58,7 +58,7 @@
             </thead>
             <tbody>
             <tr th:each="entry : ${bookEntries}">
-                <td th:text="${entry.key}"></td>
+                <td><img th:src="${entry.value.getImageLink}" alt="Image not found"></td>
                 <td th:text="${entry.value.title}"></td>
                 <td th:text="${entry.value.subTitle}"></td>
                 <td th:text="${entry.value.authors}"></td>
