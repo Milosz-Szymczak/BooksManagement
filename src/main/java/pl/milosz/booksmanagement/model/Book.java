@@ -20,6 +20,9 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "image_link")
+    private String imageLink;
+
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -32,10 +35,10 @@ public class Book {
     @Column(name = "kind_of_book", nullable = false)
     private String kind;
 
-    @Column(name = "release_date", nullable = false)
+    @Column(name = "release_date")
     private String releaseDate;
 
-    @Column(name = "isbn", nullable = false)
+    @Column(name = "isbn")
     private String isbn;
 
     @Column(name = "language", nullable = false)
