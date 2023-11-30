@@ -26,7 +26,7 @@ public class GoogleBookController {
     private Map<String, GoogleBookDto> allGoogleBooks;
 
     @GetMapping("/form-google-api")
-    public String getTest() {
+    public String getFormToSearchGoogleBook() {
         return "form-google-api";
     }
 
