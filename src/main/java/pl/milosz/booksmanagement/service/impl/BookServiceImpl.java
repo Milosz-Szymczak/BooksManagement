@@ -75,6 +75,7 @@ public class BookServiceImpl implements BookService{
     private BookDto mapToBookDto(Book book) {
         BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
+        bookDto.setImageLink(book.getImageLink());
         bookDto.setTitle(book.getTitle());
         bookDto.setPublisher(book.getPublisher());
         bookDto.setAuthor(book.getAuthor());
