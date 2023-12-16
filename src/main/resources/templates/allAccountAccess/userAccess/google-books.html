@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +16,13 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/management-check-book-admin}" style="background-color: red; !important;">Books to be confirmed - Admin</a>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                    <i><a class="nav-link" th:href="@{/management-check-book-admin}"
+                          style="font-weight: bold ; !important;">Books to check - Admin</a></i>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/management-book-admin}" style="background-color: red; !important;">Management
-                        Books - Admin</a>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                    <i> <a class="nav-link" th:href="@{/management-book-admin}"
+                           style="font-weight: bold; !important;">Management Books - Admin</a></i>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/added-books}">Books</a>
@@ -35,9 +36,8 @@
             </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a class="nav-link" th:href="@{/profil}">My Profile</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/sign-up}">Sign Up</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/log-on}">Log on</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/profile}">My Profile</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
         </ul>
     </nav>
 </header>

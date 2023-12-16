@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +9,20 @@
           crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 
-    <title>Books management - Update Book</title>
+    <title>Books management - Add Book</title>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/management-check-book-admin}" style="background-color: red; !important;">Books to be confirmed - Admin</a>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                    <i><a class="nav-link" th:href="@{/management-check-book-admin}"
+                          style="font-weight: bold ; !important;">Books to check - Admin</a></i>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/management-book-admin}" style="background-color: red; !important;">Management
-                        Books - Admin</a>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                    <i> <a class="nav-link" th:href="@{/management-book-admin}"
+                           style="font-weight: bold; !important;">Management Books - Admin</a></i>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/added-books}">Books</a>
@@ -35,17 +36,16 @@
             </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a class="nav-link" th:href="@{/profil}">My Profile</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/sign-up}">Sign Up</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/log-on}">Log on</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/profile}">My Profile</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
     <div class="container mt-5">
-        <h2>Update book</h2>
-        <form th:action="@{/form-update-book/{id}(id=${book.id})}" th:object="${book}" method="post">
+        <h2>Add new book</h2>
+        <form th:action="@{/form-add-book}" th:object="${book}" method="post">
             <img th:src="${book.imageLink}">
             <div class="form-group">
                 <label for="name">Image Link:</label>
@@ -64,7 +64,7 @@
             <div class="form-group">
                 <label for="author">Author:</label>
                 <input th:field="*{author}" type="text" class="form-control" id="author" name="author"
-                       placeholder="Enter author" required>
+                       placeholder="Enter author">
             </div>
             <div class="form-group">
                 <label for="kind">Kind:</label>
@@ -73,21 +73,20 @@
             </div>
             <div class="form-group">
                 <label for="releaseDate">Release date:</label>
-                <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate" name="releaseDate"
-                       required>
+                <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate" name="releaseDate">
             </div>
             <div class="form-group">
                 <label for="isbn">ISBN:</label>
                 <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn"
-                       placeholder="Enter number ISBN" required>
+                       placeholder="Enter number ISBN">
             </div>
             <div class="form-group">
-                <label for="isbn">language:</label>
+                <label for="isbn">Language:</label>
                 <input th:field="*{language}" type="text" class="form-control" id="language" name="language"
                        placeholder="Enter language of the book" required>
             </div>
             <br>
-            <button type="submit" class="btn btn-warning">Update Book</button>
+            <button type="submit" class="btn btn-primary">Add Book</button>
         </form>
     </div>
 </main>
