@@ -1,15 +1,14 @@
 package pl.milosz.booksmanagement.cotroller;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.milosz.booksmanagement.dto.BookDto;
-import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
 import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.service.BookService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,6 +20,7 @@ public class ManagementController {
         this.bookService = bookService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/management-check-book-admin")
     public String getBooksForCheck(Model model) {
         List<BookDto> allBook = bookService.getBooksWithoutConfirm();
@@ -29,9 +29,9 @@ public class ManagementController {
         } else {
             model.addAttribute("books", allBook);
         }
-        return "management-check-book-admin";
+        return "allAccountAccess/adminAccess/management-check-book-admin";
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/confirm-book/{id}")
     public String confirmBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
         BookDto bookById = bookService.getBookById(id);
@@ -40,6 +40,7 @@ public class ManagementController {
         return "redirect:/management-check-book-admin";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/management-book-admin")
     public String getAllConfirmBooksForAdmin(Model model) {
         List<BookDto> allBook = bookService.getBooksWithConfirm();
@@ -48,7 +49,7 @@ public class ManagementController {
         } else {
             model.addAttribute("books", allBook);
         }
-        return "management-book-admin";
+        return "allAccountAccess/adminAccess/management-book-admin";
     }
 
     @GetMapping("/added-books")
@@ -59,15 +60,16 @@ public class ManagementController {
         } else {
             model.addAttribute("books", allBook);
         }
-        return "added-books";
+        return "visitorAccess/added-books";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/form-update-book/{id}")
     public String editBook(@PathVariable Long id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));
-        return "form-update-book";
+        return "allAccountAccess/adminAccess/form-update-book";
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/form-update-book/{id}")
     public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
         BookDto existBook = bookService.getBookById(id);
@@ -83,22 +85,34 @@ public class ManagementController {
         bookService.updateBook(existBook);
         return "redirect:/management-book-admin";
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return "redirect:/management-book-admin";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/form-add-book")
     public String createBookForm(Model model) {
         model.addAttribute("book", new Book());
-        return "form-add-book";
+        return "allAccountAccess/userAccess/form-add-book";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/form-add-book")
     public String saveBook(@ModelAttribute("book") BookDto bookDto) {
         bookService.saveBook(bookDto);
+        return "redirect:/added-books";
+    }
+
+    @GetMapping("/login")
+    public String loginForm() {
+        return "accountTemplates/log-on";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
         return "redirect:/added-books";
     }
 }

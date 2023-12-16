@@ -1,5 +1,6 @@
 package pl.milosz.booksmanagement.cotroller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,17 +26,18 @@ public class GoogleBookController {
 
     private Map<String, GoogleBookDto> allGoogleBooks;
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/form-google-api")
     public String getFormToSearchGoogleBook() {
-        return "form-google-api";
+        return "allAccountAccess/userAccess/form-google-api";
     }
-
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/form-search-book/")
     public String redirectToUrl(@RequestParam("title") String title, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("title", title);
         return "redirect:/google-books";
     }
-
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/google-books")
     public String getAllGoogleBooks(Model model, @ModelAttribute("title") String title) throws IOException {
         String titleWithoutSpace = title.replaceAll("\\s", "");
@@ -49,9 +51,9 @@ public class GoogleBookController {
         }
 
         model.addAttribute("bookEntries", bookEntries);
-        return "google-books";
+        return "allAccountAccess/userAccess/google-books";
     }
-
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/google-book-to-check/{key}")
     public String sendGoogleBookToCheck(@PathVariable String key, Model model) {
         GoogleBookDto googleBookDto;
@@ -81,6 +83,6 @@ public class GoogleBookController {
             }
         }
         model.addAttribute("book", bookDto);
-        return "form-add-book";
+        return "allAccountAccess/userAccess/form-add-book";
     }
 }
