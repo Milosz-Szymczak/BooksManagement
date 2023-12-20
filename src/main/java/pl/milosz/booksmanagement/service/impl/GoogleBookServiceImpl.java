@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,6 +84,7 @@ public class GoogleBookServiceImpl implements GoogleBookService {
             String publisher = volumeInfo.has("publisher") ? volumeInfo.getString("publisher") : "";
             String languageBook = volumeInfo.has("language") ? volumeInfo.getString("language") : "";
             String bookPublisherDate = volumeInfo.has("publishedDate") ? volumeInfo.getString("publishedDate") : "";
+
 
             JSONObject imageLinks = volumeInfo.has("imageLinks") ? volumeInfo.getJSONObject("imageLinks") : new JSONObject();
             String imageLink = imageLinks.has("thumbnail") ? imageLinks.getString("thumbnail") : "";
