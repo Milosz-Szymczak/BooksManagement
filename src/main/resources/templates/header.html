@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                    <i><a class="nav-link" th:href="@{/adminBookApproval}"
+                          style="font-weight: bold ; !important;">Books to confirm - Admin</a></i>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                    <i> <a class="nav-link" th:href="@{/adminManagementBook}"
+                           style="font-weight: bold; !important;">Management Books - Admin</a></i>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/searchGoogleBook}">Search Book - Google Books API</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/addBookForm}">Add Book</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item"><a class="nav-link" th:href="@{/profile}">My Profile</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
+        </ul>
+    </nav>
+</header>
+</body>
+</html>
