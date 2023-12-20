@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,32 +17,32 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
-                        <i><a class="nav-link" th:href="@{/management-check-book-admin}"
-                              style="font-weight: bold ; !important;">Books to check - Admin</a></i>
+                        <i><a class="nav-link" th:href="@{/adminBookApproval}"
+                              style="font-weight: bold ; !important;">Books to confirm - Admin</a></i>
                     </li>
                     <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
-                        <i> <a class="nav-link" th:href="@{/management-book-admin}"
+                        <i> <a class="nav-link" th:href="@{/adminManagementBook}"
                                style="font-weight: bold; !important;">Management Books - Admin</a></i>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/added-books}">Books</a>
-                    </li>
-                    <li  class="nav-item">
-                        <a class="nav-link" th:href="@{/form-google-api}">Search Book - Google Books API</a>
+                        <a class="nav-link" th:href="@{/}">Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/form-add-book}">Add Book</a>
+                        <a class="nav-link" th:href="@{/searchGoogleBook}">Search Book - Google Books API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/addBookForm}">Add Book</a>
                     </li>
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item"><a class="nav-link" th:href="@{/profile}">My Profile</a></li>
-                <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/log-on}">Log on</a></li>
+                <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/login}">Log on</a></li>
                 <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
             </ul>
         </nav>
         <h2 sec:authorize="isAnonymous()" style="text-align: center">
-            If you want to add books and use Google Books API, just <a th:href="@{/sign-up}">Sign Up</a></h2>
+            If you want to add books and use Google Books API, just <a th:href="@{/registration}">Sign Up</a></h2>
     </header>
 <main>
     <div class="container">
@@ -56,7 +56,7 @@
                 <th> Kind</th>
                 <th> Release Date</th>
                 <th> ISBN</th>
-                <th> Language of the Book</th>
+                <th> Language </th>
             </tr>
             </thead>
             <tbody>

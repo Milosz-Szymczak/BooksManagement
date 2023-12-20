@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.dto.googleBook.BookEntryDto;
 import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
+import pl.milosz.booksmanagement.model.Book;
 import pl.milosz.booksmanagement.service.GoogleBookService;
 
 import java.io.IOException;
@@ -27,18 +28,18 @@ public class GoogleBookController {
     private Map<String, GoogleBookDto> allGoogleBooks;
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/form-google-api")
-    public String getFormToSearchGoogleBook() {
-        return "allAccountAccess/userAccess/form-google-api";
+    @GetMapping("/searchGoogleBook")
+    public String createBookForm() {
+        return "user/searchGoogleBook";
     }
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/form-search-book/")
+    @PostMapping("/searchGoogleBook")
     public String redirectToUrl(@RequestParam("title") String title, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("title", title);
-        return "redirect:/google-books";
+        return "redirect:/googleBooks";
     }
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/google-books")
+    @GetMapping("/googleBooks")
     public String getAllGoogleBooks(Model model, @ModelAttribute("title") String title) throws IOException {
         String titleWithoutSpace = title.replaceAll("\\s", "");
 
@@ -51,10 +52,10 @@ public class GoogleBookController {
         }
 
         model.addAttribute("bookEntries", bookEntries);
-        return "allAccountAccess/userAccess/google-books";
+        return "user/googleBooks";
     }
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/google-book-to-check/{key}")
+    @GetMapping("/googleBooks/{key}")
     public String sendGoogleBookToCheck(@PathVariable String key, Model model) {
         GoogleBookDto googleBookDto;
         BookDto bookDto = new BookDto();
@@ -83,6 +84,6 @@ public class GoogleBookController {
             }
         }
         model.addAttribute("book", bookDto);
-        return "allAccountAccess/userAccess/form-add-book";
+        return "user/addBookForm";
     }
 }

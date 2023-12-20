@@ -13,33 +13,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
-                    <i><a class="nav-link" th:href="@{/management-check-book-admin}"
-                          style="font-weight: bold ; !important;">Books to check - Admin</a></i>
-                </li>
-                <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
-                    <i> <a class="nav-link" th:href="@{/management-book-admin}"
-                           style="font-weight: bold; !important;">Management Books - Admin</a></i>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/added-books}">Books</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/form-google-api}">Search Book - Google Books API</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/form-add-book}">Add Book</a>
-                </li>
-            </ul>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a class="nav-link" th:href="@{/profile}">My Profile</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
-        </ul>
-    </nav>
+    <div th:replace="header.html"></div>
 </header>
 <main>
     <div class="container">
@@ -66,7 +40,7 @@
                 <td th:text="${entry.value.isbn}"></td>
                 <td th:text="${entry.value.language}"></td>
                 <td>
-                    <a th:href="@{/google-book-to-check/{key}(key=${entry.key})}"
+                    <a th:href="@{/googleBooks/{key}(key=${entry.key})}"
                        class="btn btn-success">Add book</a>
                 </td>
             </tr>

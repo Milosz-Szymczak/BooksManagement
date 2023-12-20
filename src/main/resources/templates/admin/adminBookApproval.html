@@ -13,33 +13,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <i><a class="nav-link" th:href="@{/management-check-book-admin}"
-                          style="font-weight: bold ; !important;">Books to check - Admin</a></i>
-                </li>
-                <li class="nav-item active">
-                    <i> <a class="nav-link" th:href="@{/management-book-admin}"
-                           style="font-weight: bold; !important;">Management Books - Admin</a></i>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/added-books}">Books</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/form-google-api}">Search Book - Google Books API</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/form-add-book}">Add Book</a>
-                </li>
-            </ul>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a class="nav-link" th:href="@{/profile}">My Profile</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
-        </ul>
-    </nav>
+    <div th:replace="header.html"></div>
 </header>
 <main>
     <table class="table table-striped table-bordered">
@@ -72,9 +46,9 @@
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.language}"></td>
             <td>
-                <a th:href="@{/confirm-book/{id}(id=${book.id})}"
+                <a th:href="@{/confirmBook/{id}(id=${book.id})}"
                    class="btn btn-success">Confirm Book</a>
-                <a th:href="@{/form-update-book/{id}(id=${book.id})}"
+                <a th:href="@{/updateBook/{id}(id=${book.id})}"
                    class="btn btn-warning">Update Book</a>
                 <a th:href="@{/delete/{id}(id=${book.id})}"
                    class="btn btn-danger">Delete Book</a>
