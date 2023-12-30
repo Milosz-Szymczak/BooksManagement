@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
         <form th:action="@{/updateBook/{id}(id=${book.id})}" th:object="${book}" method="post">
             <img th:src="${book.imageLink}">
             <div class="form-group">
-                <label for="name">Image Link:</label>
+                <label for="imageLink">Image Link:</label>
                 <input th:field="*{imageLink}" type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Enter image link">
             </div>
             <div class="form-group">
@@ -54,7 +54,7 @@
                        placeholder="Enter number ISBN" required>
             </div>
             <div class="form-group">
-                <label for="isbn">language:</label>
+                <label for="language">language:</label>
                 <input th:field="*{language}" type="text" class="form-control" id="language" name="language"
                        placeholder="Enter language of the book" required>
             </div>
