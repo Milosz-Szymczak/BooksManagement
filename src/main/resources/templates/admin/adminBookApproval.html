@@ -12,9 +12,7 @@
     <title>Books Management - Admin panel</title>
 </head>
 <body>
-<header>
-    <div th:replace="header.html"></div>
-</header>
+<header th:insert="~{header.html}"></header>
 <main>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
@@ -33,7 +31,7 @@
         <tbody>
         <tr th:each="book: ${books}">
             <td>
-                <div th:if="${not #strings.isEmpty(book.imageLink)}"> <img th:src="${book.imageLink}" alt="Book Cover">
+                <div th:if="${not #strings.isEmpty(book.imageLink)}"> <img th:src="${book.imageLink}" alt="Image of book">
                 </div>
                 <div th:if="${#strings.isEmpty(book.imageLink)}"> <img src="/img/iconBook.jpg" alt="Book Cover">
                 </div>
@@ -41,7 +39,7 @@
             <td th:text="${book.title}"></td>
             <td th:text="${book.publisher}"></td>
             <td th:text="${book.author}"></td>
-            <td th:text="${book.kind}"></td>
+            <td th:text="${book.kind.getDisplayName()}"></td>
             <td th:text="${book.releaseDate}"></td>
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.language}"></td>
@@ -50,6 +48,7 @@
                    class="btn btn-success">Confirm Book</a>
                 <a th:href="@{/updateBook/{id}(id=${book.id})}"
                    class="btn btn-warning">Update Book</a>
+                <br>
                 <a th:href="@{/delete/{id}(id=${book.id})}"
                    class="btn btn-danger">Delete Book</a>
             </td>
