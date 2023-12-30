@@ -6,8 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.milosz.booksmanagement.dto.BookDto;
-import pl.milosz.booksmanagement.model.Book;
+import pl.milosz.booksmanagement.model.book.Book;
+import pl.milosz.booksmanagement.model.book.Kind;
+import pl.milosz.booksmanagement.model.book.Rating;
 import pl.milosz.booksmanagement.service.BookService;
+import pl.milosz.booksmanagement.service.RatingService;
 
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class BookController {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/addBookForm")
     public String createBookForm(Model model) {
+        model.addAttribute("kind", Kind.values());
         model.addAttribute("book", new Book());
         return "user/addBookForm";
     }

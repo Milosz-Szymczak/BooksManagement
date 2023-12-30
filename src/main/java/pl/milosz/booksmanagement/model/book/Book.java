@@ -1,13 +1,10 @@
-package pl.milosz.booksmanagement.model;
+package pl.milosz.booksmanagement.model.book;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.*;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -47,4 +44,9 @@ public class Book {
 
     @Column(name = "confirm", nullable = false)
     private boolean confirm;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @Column(name = "rating")
+    private List<Rating> ratings = new ArrayList<>();
+
 }
