@@ -32,8 +32,9 @@ public class Book {
     @Column(name = "author", nullable = false)
     private String author;
 
-    @Column(name = "kind_of_book", nullable = false)
-    private String kind;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "kind", nullable = false)
+    private Kind kind;
 
     @Column(name = "release_date")
     private String releaseDate;

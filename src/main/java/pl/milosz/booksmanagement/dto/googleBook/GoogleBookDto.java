@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +17,8 @@ public class GoogleBookDto {
     private String title;
     private String subTitle;
     private String publisher;
-    private ArrayList<String> authors;
+    private List<String> kind;
+    private List<String> authors;
     private String publishedDate;
     private String isbn;
     private String language;

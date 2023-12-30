@@ -1,8 +1,10 @@
 package pl.milosz.booksmanagement.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,12 +16,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import pl.milosz.booksmanagement.service.UserService;
+import pl.milosz.booksmanagement.service.impl.UserServiceImpl;
 
 
 @Configuration
 @EnableMethodSecurity
 @EnableWebSecurity
 public class SecurityConfig {
+
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -31,7 +36,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form.loginPage("/login"))
                 .logout(form -> form.logoutRequestMatcher(new AntPathRequestMatcher("/log-out"))
-                                .logoutSuccessUrl("/added-books"));
+                                .logoutSuccessUrl("/"));
 
         return http.build();
     }

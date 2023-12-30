@@ -3,7 +3,7 @@ package pl.milosz.booksmanagement.service.impl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import pl.milosz.booksmanagement.dto.BookDto;
-import pl.milosz.booksmanagement.model.Book;
+import pl.milosz.booksmanagement.model.book.Book;
 import pl.milosz.booksmanagement.repository.BookRepository;
 import pl.milosz.booksmanagement.service.BookService;
 

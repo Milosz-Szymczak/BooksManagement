@@ -8,7 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.dto.googleBook.BookEntryDto;
 import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
-import pl.milosz.booksmanagement.model.Book;
+import pl.milosz.booksmanagement.model.book.Kind;
 import pl.milosz.booksmanagement.service.GoogleBookService;
 
 import java.io.IOException;
@@ -32,6 +32,7 @@ public class GoogleBookController {
     public String createBookForm() {
         return "user/searchGoogleBook";
     }
+
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/searchGoogleBook")
     public String redirectToUrl(@RequestParam("title") String title, RedirectAttributes redirectAttributes) {
@@ -66,7 +67,7 @@ public class GoogleBookController {
                 String title = googleBookDto.getTitle() + googleBookDto.getSubTitle();
                 bookDto.setTitle(title);
 
-                ArrayList<String> authorsFromGoogle = googleBookDto.getAuthors();
+                List<String> authorsFromGoogle = googleBookDto.getAuthors();
                 StringBuilder authors = new StringBuilder();
                 for (String author : authorsFromGoogle) {
                     authors.append(author);
@@ -76,7 +77,6 @@ public class GoogleBookController {
                 bookDto.setImageLink(googleBookDto.getImageLink());
                 bookDto.setPublisher(googleBookDto.getPublisher());
                 bookDto.setAuthor(String.valueOf(authors));
-                bookDto.setKind("Unknown");
                 bookDto.setReleaseDate(googleBookDto.getPublishedDate());
                 bookDto.setIsbn(googleBookDto.getIsbn());
                 bookDto.setLanguage(googleBookDto.getLanguage());
@@ -84,6 +84,7 @@ public class GoogleBookController {
             }
         }
         model.addAttribute("book", bookDto);
+        model.addAttribute("kind", Kind.values());
         return "user/addBookForm";
     }
 }

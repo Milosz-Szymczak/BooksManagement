@@ -3,7 +3,7 @@ package pl.milosz.booksmanagement.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
-import pl.milosz.booksmanagement.model.Book;
+import pl.milosz.booksmanagement.model.book.Book;
 
 import java.util.List;
 

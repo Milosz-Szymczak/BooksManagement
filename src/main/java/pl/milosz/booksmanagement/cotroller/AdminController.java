@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.milosz.booksmanagement.dto.BookDto;
-import pl.milosz.booksmanagement.model.Book;
+import pl.milosz.booksmanagement.model.book.Book;
 import pl.milosz.booksmanagement.service.BookService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AdminController {
@@ -24,11 +25,12 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/adminBookApproval")
     public String getBooksNotConfirm(Model model) {
-        List<BookDto> allBook = bookService.getBooksNotConfirm();
-        if (allBook.isEmpty()) {
+        List<BookDto> allBooks = bookService.getBooksNotConfirm();
+
+        if (allBooks.isEmpty()) {
             model.addAttribute("book", new Book());
         } else {
-            model.addAttribute("books", allBook);
+            model.addAttribute("books", allBooks);
         }
         return "admin/adminBookApproval";
     }

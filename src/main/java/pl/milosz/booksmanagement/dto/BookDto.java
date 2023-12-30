@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.milosz.booksmanagement.model.book.Kind;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class BookDto {
     private String title;
     private String publisher;
     private String author;
-    private String kind;
+    private Kind kind;
     private String releaseDate;
     private String isbn;
     private String language;
