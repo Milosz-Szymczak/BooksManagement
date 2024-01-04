@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.milosz.booksmanagement.model.user.User;
-import pl.milosz.booksmanagement.service.UserService;
+import pl.milosz.booksmanagement.security.config.SecurityConfig;
+import pl.milosz.booksmanagement.security.service.UserService;
 
 @Controller
 public class UserController {
@@ -24,7 +25,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout() {
-        return "redirect:/added-books";
+        return "redirect:/";
     }
 
     @GetMapping("/registration")
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/form-add-user")
-    public String formAddUser(@ModelAttribute User user) {
+    public String formRegistration(@ModelAttribute User user) {
         userService.saveUser(user);
         return "redirect:/tableOfBooks";
     }
