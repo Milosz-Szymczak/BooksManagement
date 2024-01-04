@@ -36,7 +36,6 @@
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item"><a class="nav-link" th:href="@{/profile}">My Profile</a></li>
                 <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/login}">Log on</a></li>
                 <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
             </ul>
