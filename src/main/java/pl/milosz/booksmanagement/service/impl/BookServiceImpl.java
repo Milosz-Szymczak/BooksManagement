@@ -2,6 +2,7 @@ package pl.milosz.booksmanagement.service.impl;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.book.Book;
 import pl.milosz.booksmanagement.repository.BookRepository;
@@ -11,7 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class BookServiceImpl implements BookService{
+class BookServiceImpl implements BookService{
 
     private final BookRepository bookRepository;
 
@@ -56,9 +57,29 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void updateBook(BookDto bookDto) {
-        Book book = new Book();
-        BeanUtils.copyProperties(bookDto, book);
+    @Transactional
+    public void updateBook(Long id, Book book) {
+        BookDto existBook = getBookById(id);
+        existBook.setImageLink(book.getImageLink());
+        existBook.setTitle(book.getTitle());
+        existBook.setAuthor(book.getAuthor());
+        existBook.setKind(book.getKind());
+        existBook.setIsbn(book.getIsbn());
+        existBook.setLanguage(book.getLanguage());
+        existBook.setPublisher(book.getPublisher());
+        existBook.setReleaseDate(book.getReleaseDate());
+
+        BeanUtils.copyProperties(existBook, book);
+
+        bookRepository.save(book);
+    }
+
+    @Override
+    public void confirmBook(Long id, Book book) {
+        BookDto existBook = getBookById(id);
+        existBook.setConfirm(true);
+        BeanUtils.copyProperties(existBook, book);
+
         bookRepository.save(book);
     }
 

@@ -8,7 +8,7 @@ import pl.milosz.booksmanagement.service.RatingService;
 import java.util.List;
 
 @Service
-public class RatingServiceImpl implements RatingService {
+class RatingServiceImpl implements RatingService {
 
     private final RatingReposotory ratingReposotory;
 

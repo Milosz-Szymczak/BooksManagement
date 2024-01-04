@@ -1,16 +1,16 @@
-package pl.milosz.booksmanagement.cotroller;
+package pl.milosz.booksmanagement.controller;
 
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.book.Book;
 import pl.milosz.booksmanagement.model.book.Kind;
-import pl.milosz.booksmanagement.model.book.Rating;
 import pl.milosz.booksmanagement.service.BookService;
-import pl.milosz.booksmanagement.service.RatingService;
 
 import java.util.List;
 

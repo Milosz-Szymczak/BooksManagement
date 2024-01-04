@@ -15,4 +15,8 @@ public interface BookRepository extends ListCrudRepository<Book, Long> {
 
     @Query(value = "SELECT * from books where confirm = false", nativeQuery = true)
     List<Book> getBooksNotConfirm();
+
+   // @Query(value = "SELECT * from books where confirm = false", nativeQuery = true)
+    List<Book> findAllByOrderByTitleAsc();
+
 }

@@ -1,4 +1,4 @@
-package pl.milosz.booksmanagement.cotroller;
+package pl.milosz.booksmanagement.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
