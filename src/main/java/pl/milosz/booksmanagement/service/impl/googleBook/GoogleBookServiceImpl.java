@@ -20,7 +20,7 @@ class GoogleBookServiceImpl implements GoogleBookService {
         this.googleBookConnector = googleBookConnector;
     }
 
-    private Map<String, GoogleBookDto> allGoogleBooks = new HashMap<>();
+    private final Map<String, GoogleBookDto> allGoogleBooks = new HashMap<>();
 
     @Override
     public List<BookEntryMapDto> getAllGoogleBooks(String title) {
@@ -32,6 +32,7 @@ class GoogleBookServiceImpl implements GoogleBookService {
         for (Map.Entry<String, GoogleBookDto> entry : allGoogleBooks.entrySet()) {
             bookEntries.add(new BookEntryMapDto(entry.getKey(), entry.getValue()));
         }
+        allGoogleBooks.clear();
 
         return bookEntries;
     }

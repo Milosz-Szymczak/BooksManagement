@@ -7,14 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.dto.googleBook.BookEntryMapDto;
-import pl.milosz.booksmanagement.dto.googleBook.GoogleBookDto;
 import pl.milosz.booksmanagement.model.book.Kind;
 import pl.milosz.booksmanagement.service.GoogleBookService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class GoogleBookController {
