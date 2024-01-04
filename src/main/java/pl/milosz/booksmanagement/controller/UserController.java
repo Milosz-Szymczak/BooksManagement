@@ -13,9 +13,11 @@ import pl.milosz.booksmanagement.security.service.UserService;
 public class UserController {
 
     private final UserService userService;
+    private final SecurityConfig securityConfig;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, SecurityConfig securityConfig) {
         this.userService = userService;
+        this.securityConfig = securityConfig;
     }
 
     @GetMapping("/login")
@@ -37,6 +39,7 @@ public class UserController {
     @PostMapping("/form-add-user")
     public String formRegistration(@ModelAttribute User user) {
         userService.saveUser(user);
-        return "redirect:/tableOfBooks";
+        securityConfig.addNewUser(user);
+        return "redirect:/login";
     }
 }
