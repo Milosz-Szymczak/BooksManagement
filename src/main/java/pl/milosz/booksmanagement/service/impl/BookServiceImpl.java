@@ -22,12 +22,11 @@ class BookServiceImpl implements BookService{
     }
 
     @Override
-    public BookDto saveBook(BookDto bookDto) {
+    public void saveBook(BookDto bookDto) {
         bookDto.setConfirm(false);
         Book book = new Book();
         BeanUtils.copyProperties(bookDto,book);
         bookRepository.save(book);
-        return bookDto;
     }
 
     @Override
@@ -70,7 +69,7 @@ class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void confirmBook(Long id, BookDto bookDto) {
+    public void confirmBook(Long id) {
         BookDto existBookDto = getBookById(id);
         existBookDto.setConfirm(true);
 

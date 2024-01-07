@@ -31,8 +31,8 @@
 
                             <!-- Image Link Input -->
                             <div class="mb-3">
-                                <label for="imageLink" class="form-label">Image Link <span class="text-danger">*</span></label>
-                                <input th:field="*{imageLink}" type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Enter image link">
+                                <label for="imageLink" class="form-label">Image Link</label>
+                                <input th:field="*{imageLink}" type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Enter image link" >
                             </div>
 
                             <!-- Title Input -->
@@ -49,8 +49,8 @@
 
                             <!-- Author Input -->
                             <div class="mb-3">
-                                <label for="author" class="form-label">Author</label>
-                                <input th:field="*{author}" type="text" class="form-control" id="author" name="author" placeholder="Enter author">
+                                <label for="author" class="form-label">Author <span class="text-danger">*</span></label>
+                                <input th:field="*{author}" type="text" class="form-control" id="author" name="author" placeholder="Enter author" required>
                             </div>
 
                             <!-- Kind Selection -->

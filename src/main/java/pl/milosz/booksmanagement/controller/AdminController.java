@@ -36,8 +36,8 @@ public class AdminController {
     }
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/confirmBook/{id}")
-    public String confirmBook(@PathVariable Long id, @ModelAttribute("book") BookDto bookDto) {
-        bookService.confirmBook(id, bookDto);
+    public String confirmBook(@PathVariable Long id) {
+        bookService.confirmBook(id);
         return "redirect:/adminBookApproval";
     }
 

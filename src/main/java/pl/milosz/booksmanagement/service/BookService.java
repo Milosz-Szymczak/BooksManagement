@@ -1,13 +1,12 @@
 package pl.milosz.booksmanagement.service;
 
 import pl.milosz.booksmanagement.dto.BookDto;
-import pl.milosz.booksmanagement.model.book.Book;
 
 import java.util.List;
 
 
 public interface BookService {
-    BookDto saveBook(BookDto bookDto);
+    void saveBook(BookDto bookDto);
 
     List<BookDto> getBooksNotConfirm();
     List<BookDto> getConfirmBooks();
@@ -15,7 +14,7 @@ public interface BookService {
     BookDto getBookById(Long id);
 
     void updateBook(Long id, BookDto bookDto);
-    void confirmBook(Long id, BookDto bookDto);
+    void confirmBook(Long id);
 
     void deleteBook(Long id);
 }
