@@ -45,8 +45,4 @@ public class Book {
     @Column(name = "confirm", nullable = false)
     private boolean confirm;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @Column(name = "rating")
-    private List<Rating> ratings = new ArrayList<>();
-
 }
