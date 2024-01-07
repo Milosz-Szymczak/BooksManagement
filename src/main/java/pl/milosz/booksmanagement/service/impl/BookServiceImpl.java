@@ -50,44 +50,40 @@ class BookServiceImpl implements BookService{
 
     @Override
     public BookDto getBookById(Long id) {
-        Book book = bookRepository.findById(id).get();
-        BookDto bookDto = new BookDto();
-        BeanUtils.copyProperties(book, bookDto);
-        return bookDto;
+        Optional<Book> bookOptional = bookRepository.findById(id);
+
+        if (bookOptional.isPresent()) {
+            BookDto bookDto = new BookDto();
+            BeanUtils.copyProperties(bookOptional.get(), bookDto);
+            return bookDto;
+        } else {
+            throw new NoSuchElementException("Book not found with ID: " + id);
+        }
     }
 
     @Override
     @Transactional
-    public void updateBook(Long id, Book book) {
-        BookDto existBook = getBookById(id);
-        existBook.setImageLink(book.getImageLink());
-        existBook.setTitle(book.getTitle());
-        existBook.setAuthor(book.getAuthor());
-        existBook.setKind(book.getKind());
-        existBook.setIsbn(book.getIsbn());
-        existBook.setLanguage(book.getLanguage());
-        existBook.setPublisher(book.getPublisher());
-        existBook.setReleaseDate(book.getReleaseDate());
-
-        BeanUtils.copyProperties(existBook, book);
-
+    public void updateBook(Long id, BookDto bookDto) {
+        Book book = new Book();
+        BeanUtils.copyProperties(bookDto, book);
         bookRepository.save(book);
     }
 
     @Override
-    public void confirmBook(Long id, Book book) {
-        BookDto existBook = getBookById(id);
-        existBook.setConfirm(true);
-        BeanUtils.copyProperties(existBook, book);
+    public void confirmBook(Long id, BookDto bookDto) {
+        BookDto existBookDto = getBookById(id);
+        existBookDto.setConfirm(true);
 
+        Book book = new Book();
+        BeanUtils.copyProperties(existBookDto, book);
         bookRepository.save(book);
     }
 
     @Override
     public void deleteBook(Long id) {
-        BookDto bookById = getBookById(id);
+        BookDto bookDtoById = getBookById(id);
         Book book = new Book();
-        BeanUtils.copyProperties(bookById, book);
+        BeanUtils.copyProperties(bookDtoById, book);
         bookRepository.delete(book);
     }
 

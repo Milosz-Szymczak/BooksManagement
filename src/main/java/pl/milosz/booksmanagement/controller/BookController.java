@@ -25,11 +25,11 @@ public class BookController {
 
     @GetMapping("/")
     public String getConfirmBooks(Model model) {
-        List<BookDto> allBook = bookService.getConfirmBooks();
-        if (allBook.isEmpty()) {
-            model.addAttribute("book", new Book());
+        List<BookDto> allBookDto = bookService.getConfirmBooks();
+        if (allBookDto.isEmpty()) {
+            model.addAttribute("book", new BookDto());
         } else {
-            model.addAttribute("books", allBook);
+            model.addAttribute("books", allBookDto);
         }
         return "visitor/listBooks";
     }
@@ -38,7 +38,7 @@ public class BookController {
     @GetMapping("/addBookForm")
     public String createBookForm(Model model) {
         model.addAttribute("kind", Kind.values());
-        model.addAttribute("book", new Book());
+        model.addAttribute("book", new BookDto());
         return "user/addBookForm";
     }
 

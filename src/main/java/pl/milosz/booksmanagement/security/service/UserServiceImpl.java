@@ -3,7 +3,6 @@ package pl.milosz.booksmanagement.security.service;
 import org.springframework.stereotype.Service;
 import pl.milosz.booksmanagement.model.user.User;
 import pl.milosz.booksmanagement.repository.UserRepository;
-import pl.milosz.booksmanagement.security.config.SecurityConfig;
 
 import java.util.List;
 

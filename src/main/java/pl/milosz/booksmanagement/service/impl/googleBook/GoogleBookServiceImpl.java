@@ -24,6 +24,7 @@ class GoogleBookServiceImpl implements GoogleBookService {
 
     @Override
     public List<BookEntryMapDto> getAllGoogleBooks(String title) {
+        allGoogleBooks.clear();
         String titleWithoutSpace = title.replaceAll("\\s", "");
 
         googleBookConnector.tryConnectWithGoogleApi(allGoogleBooks, titleWithoutSpace);
@@ -32,7 +33,6 @@ class GoogleBookServiceImpl implements GoogleBookService {
         for (Map.Entry<String, GoogleBookDto> entry : allGoogleBooks.entrySet()) {
             bookEntries.add(new BookEntryMapDto(entry.getKey(), entry.getValue()));
         }
-        allGoogleBooks.clear();
 
         return bookEntries;
     }

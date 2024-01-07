@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.book.Book;
+import pl.milosz.booksmanagement.model.book.Kind;
 import pl.milosz.booksmanagement.service.BookService;
 
 import java.util.List;
@@ -24,31 +25,31 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/adminBookApproval")
     public String getBooksNotConfirm(Model model) {
-        List<BookDto> allBooks = bookService.getBooksNotConfirm();
+        List<BookDto> allBook = bookService.getBooksNotConfirm();
 
-        if (allBooks.isEmpty()) {
-            model.addAttribute("book", new Book());
+        if (allBook.isEmpty()) {
+            model.addAttribute("book", new BookDto());
         } else {
-            model.addAttribute("books", allBooks);
+            model.addAttribute("books", allBook);
         }
         return "admin/adminBookApproval";
     }
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/confirmBook/{id}")
-    public String confirmBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
-        bookService.confirmBook(id, book);
+    public String confirmBook(@PathVariable Long id, @ModelAttribute("book") BookDto bookDto) {
+        bookService.confirmBook(id, bookDto);
         return "redirect:/adminBookApproval";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/adminManagementBook")
     public String getConfirmBooks(Model model) {
-        List<BookDto> allBook = bookService.getConfirmBooks();
+        List<BookDto> allBookDto = bookService.getConfirmBooks();
 
-        if (allBook.isEmpty()) {
-            model.addAttribute("book", new Book());
+        if (allBookDto.isEmpty()) {
+            model.addAttribute("book", new BookDto());
         } else {
-            model.addAttribute("books", allBook);
+            model.addAttribute("books", allBookDto);
         }
         return "admin/adminManagementBook";
     }
@@ -56,14 +57,15 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/updateBook/{id}")
     public String editBook(@PathVariable Long id, Model model) {
+        model.addAttribute("kind", Kind.values());
         model.addAttribute("book", bookService.getBookById(id));
         return "admin/adminBookUpdate";
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/updateBook/{id}")
-    public String updateBook(@PathVariable Long id, @ModelAttribute("book") Book book) {
-        bookService.updateBook(id, book);
-        return "redirect:/adminManagementBook";
+    public String updateBook(@PathVariable Long id, @ModelAttribute("book") BookDto bookDto) {
+        bookService.updateBook(id, bookDto);
+        return "redirect:/adminBookApproval";
     }
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete/{id}")
