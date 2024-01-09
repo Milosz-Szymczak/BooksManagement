@@ -21,11 +21,12 @@ This is a web application built with:
 
 ## Screenshots
 
+### Unlogged view:
+![books_view](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/b8184f43-9738-4918-a493-84aa07e24ed2)
+
 ### User view:
-![books_view](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/3eb68e1a-c32c-4ca7-a654-d02b6ba78508)
 
 #### Search Book - Google Book API
-
 ![Googe_Books_view](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/33e5162d-2a31-4f71-bbe6-422a28e54e1d)
 
 #### Add Book 
