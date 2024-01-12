@@ -69,6 +69,7 @@ class BookServiceImpl implements BookService{
     }
 
     @Override
+    @Transactional
     public void confirmBook(Long id) {
         BookDto existBookDto = getBookById(id);
         existBookDto.setConfirm(true);
