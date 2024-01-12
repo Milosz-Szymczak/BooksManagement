@@ -20,14 +20,17 @@ class GoogleBookConnector {
     }
 
     public void tryConnectWithGoogleApi(Map<String, GoogleBookDto> allGoogleBooks, String title) {
+        HttpURLConnection connection = null;
         try {
-            HttpURLConnection connection = connectWithGoogleApi(title);
-
+            connection = connectWithGoogleApi(title);
             searchGoogleBook(connection, allGoogleBooks);
 
-            connection.disconnect();
         } catch (HttpConnectionException | IOException e) {
             throw new HttpConnectionException("Error while communicating with API Google");
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
     }
 
