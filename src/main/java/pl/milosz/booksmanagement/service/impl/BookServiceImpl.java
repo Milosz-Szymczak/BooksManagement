@@ -87,6 +87,17 @@ class BookServiceImpl implements BookService{
         bookRepository.delete(book);
     }
 
+    @Override
+    public List<BookDto> getBooksAddedByUser(String username) {
+        List<BookDto> allBooks = new ArrayList<>();
+        List<BookDto> confirmBooks = getConfirmBooks().stream().filter(bookDto -> bookDto.getUser().getUsername().equals(username)).toList();
+        List<BookDto> booksNotConfirm = getBooksNotConfirm().stream().filter(bookDto -> bookDto.getUser().getUsername().equals(username)).toList();
+        allBooks.addAll(confirmBooks);
+        allBooks.addAll(booksNotConfirm);
+
+        return allBooks;
+    }
+
     private BookDto mapToBookDto(Book book) {
         BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
@@ -99,6 +110,7 @@ class BookServiceImpl implements BookService{
         bookDto.setIsbn(book.getIsbn());
         bookDto.setLanguage(book.getLanguage());
         bookDto.setConfirm(book.isConfirm());
+        bookDto.setUser(book.getUser());
         return bookDto;
     }
 }
