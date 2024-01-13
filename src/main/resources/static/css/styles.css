@@ -1,32 +1,73 @@
-* {
-    margin: 0;
-    padding: 0;
-}
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-main {
-    margin: 10px;
-}
-
-img {
-    height: auto;
-    width: 130px;
-}
-
-footer {
-    background-color: burlywood;
-    color: white;
+h1 {
     text-align: center;
-    padding: 10px;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
 }
+
 a {
     margin: 5px;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    max-width: 95%;
+}
+
+.table {
+    width: 100%;
+    table-layout: auto;
+}
+
+
+.table thead {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.table th,
+.table td {
+    font-size: 1rem;
+}
+
+.table th {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #dddfe2;
+}
+
+.table img {
+    width: 100px;
+    height: auto;
+    margin: 10px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table th,
+    .table td {
+        padding: 8px; /* smaller padding on smaller screens */
+        font-size: 0.9rem; /* slightly smaller font size on smaller screens */
+    }
+
+    .table img {
+        width: 80px; /* smaller images on smaller screens */
+    }
 }
