@@ -17,4 +17,6 @@ public interface BookService {
     void confirmBook(Long id);
 
     void deleteBook(Long id);
+
+    List<BookDto> getBooksAddedByUser(String username);
 }
