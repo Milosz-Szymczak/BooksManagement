@@ -22,20 +22,28 @@ This is a web application built with:
 ## Screenshots
 
 ### Unlogged view:
-![books_view](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/b8184f43-9738-4918-a493-84aa07e24ed2)
+![visit_site](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/6d8d4c78-29d2-45ef-94b5-9af44e0b644b)
+
 
 ### User view:
 
 #### Search Book - Google Book API
-![Googe_Books_view](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/33e5162d-2a31-4f71-bbe6-422a28e54e1d)
+![google_book](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/5706a397-626c-4121-a0c4-ef20ba88bbe8)
+
 
 #### Add Book 
-![add_book_view](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/21cb10e9-cd23-4616-a3ac-85c2888c2740)
+![add_book](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/ed249029-fba9-4eee-9100-1a755b8b7949)
+
+### User profile
+![my_profile](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/29711560-a1f1-49e4-bebb-edfd07d392ff)
+
 
 ### Administrator view:
 
 #### Management Books
-![admin_view](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/ea175adf-9ded-4455-87a9-efcc6349da8e)
+![management_books](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/727c56d0-9c1c-4d14-bedb-ff88d6bf1771)
+
 
 #### Books to confirm
-![books_to_confirm](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/8aeb9da0-d542-46b8-a2fd-58dec9c95c84)
+![books_to_confirm](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/5481d7e0-92e2-4072-8268-fe4c409c7615)
+
