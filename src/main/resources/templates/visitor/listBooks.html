@@ -12,37 +12,7 @@
     <title>Books Management - Admin panel</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
-                        <i><a class="nav-link" th:href="@{/adminBookApproval}"
-                              style="font-weight: bold ; !important;">Books to confirm - Admin</a></i>
-                    </li>
-                    <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
-                        <i> <a class="nav-link" th:href="@{/adminManagementBook}"
-                               style="font-weight: bold; !important;">Management Books - Admin</a></i>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/}">Books</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/searchGoogleBook}">Search Book - Google Books API</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/addBookForm}">Add Book</a>
-                    </li>
-                </ul>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/login}">Log on</a></li>
-                <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/log-out}">Log out</a></li>
-            </ul>
-        </nav>
-        <h2 sec:authorize="isAnonymous()" style="text-align: center">
-            If you want to add books and use Google Books API, just <a th:href="@{/registration}">Sign Up</a></h2>
-    </header>
+<header th:insert="~{header.html}"></header>
 <main>
     <div class="container">
         <table class="table table-striped table-bordered">
@@ -93,8 +63,5 @@
         });
     </script>
 
-<footer>
-    <p>BookSite</p>
-</footer>
 </body>
 </html>

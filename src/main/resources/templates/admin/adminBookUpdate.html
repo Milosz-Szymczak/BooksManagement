@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,57 +17,103 @@
 
 <main>
     <div class="container mt-5">
-        <h2>Update book</h2>
-        <form th:action="@{/updateBook/{id}(id=${book.id})}" th:object="${book}" method="post">
-            <img th:src="${book.imageLink}">
-            <div class="form-group">
-                <label for="imageLink">Image Link:</label>
-                <input th:field="*{imageLink}" type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Enter image link">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="mb-4 text-center">Update book</h2>
+                        <form th:action="@{/updateBook/{id}(id=${book.id})}" th:object="${book}" method="post">
+
+                            <!-- Image Preview -->
+                            <div class="mb-3 text-center">
+                                <img th:src="${book.imageLink}" id="imagePreview" class="img-fluid rounded"
+                                     alt="Book Cover Preview">
+                            </div>
+
+                            <!-- Image Link Input -->
+                            <div class="mb-3">
+                                <label for="imageLink" class="form-label">Image Link</label>
+                                <input th:field="*{imageLink}" type="text" class="form-control" id="imageLink"
+                                       name="imageLink" placeholder="Enter image link">
+                            </div>
+
+                            <!-- Title Input -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Title <span class="text-danger">*</span></label>
+                                <input th:field="*{title}" type="text" class="form-control" id="name" name="name"
+                                       placeholder="Enter book title" required>
+                            </div>
+
+                            <!-- Publisher Input -->
+                            <div class="mb-3">
+                                <label for="publisher" class="form-label">Publisher <span
+                                        class="text-danger">*</span></label>
+                                <input th:field="*{publisher}" type="text" class="form-control" id="publisher"
+                                       name="publisher" placeholder="Enter publisher" required>
+                            </div>
+
+                            <!-- Author Input -->
+                            <div class="mb-3">
+                                <label for="author" class="form-label">Author <span class="text-danger">*</span></label>
+                                <input th:field="*{author}" type="text" class="form-control" id="author" name="author"
+                                       placeholder="Enter author" required>
+                            </div>
+
+                            <!-- Kind Selection -->
+                            <div class="mb-3">
+                                <label for="kind" class="form-label">Kind <span class="text-danger">*</span></label>
+                                <select th:field="*{kind}" class="form-select" id="kind" name="kind" required>
+                                    <option th:each="kind : ${kind}" th:value="${kind.name()}"
+                                            th:text="${kind.getDisplayName()}"></option>
+                                </select>
+                            </div>
+
+                            <!-- Release Date & ISBN Inputs (side by side) -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="releaseDate" class="form-label">Release Date <span class="text-danger">*</span></label>
+                                    <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate"
+                                           name="releaseDate" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="isbn" class="form-label">ISBN <span class="text-danger">*</span></label>
+                                    <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn"
+                                           placeholder="Enter ISBN" required>
+                                </div>
+                            </div>
+
+                            <!-- Language Input -->
+                            <div class="mb-3">
+                                <label for="language" class="form-label">Language <span
+                                        class="text-danger">*</span></label>
+                                <input th:field="*{language}" type="text" class="form-control" id="language"
+                                       name="language" placeholder="Enter book language" required>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Add Book</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="name">Title:</label>
-                <input th:field="*{title}" type="text" class="form-control" id="name" name="name"
-                       placeholder="Enter a book title" required>
-            </div>
-            <div class="form-group">
-                <label for="publisher">Publisher:</label>
-                <input th:field="*{publisher}" type="text" class="form-control" id="publisher" name="publisher"
-                       placeholder="Enter a publisher" required>
-            </div>
-            <div class="form-group">
-                <label for="author">Author:</label>
-                <input th:field="*{author}" type="text" class="form-control" id="author" name="author"
-                       placeholder="Enter author" required>
-            </div>
-            <div class="mb-3">
-                <label for="kind" class="form-label">Kind <span class="text-danger">*</span></label>
-                <select th:field="*{kind}" class="form-select" id="kind" name="kind" required>
-                    <option th:each="kind : ${kind}" th:value="${kind.name()}" th:text="${kind.getDisplayName()}"></option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="releaseDate">Release date:</label>
-                <input th:field="*{releaseDate}" type="date" class="form-control" id="releaseDate" name="releaseDate"
-                       required>
-            </div>
-            <div class="form-group">
-                <label for="isbn">ISBN:</label>
-                <input th:field="*{isbn}" type="number" class="form-control" id="isbn" name="isbn"
-                       placeholder="Enter number ISBN" required>
-            </div>
-            <div class="form-group">
-                <label for="language">language:</label>
-                <input th:field="*{language}" type="text" class="form-control" id="language" name="language"
-                       placeholder="Enter language of the book" required>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-warning">Update Book</button>
-        </form>
+        </div>
     </div>
 </main>
 
-<footer>
-    <p>BookSite</p>
-</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageLinkInput = document.getElementById('imageLink');
+        const imagePreview = document.getElementById('imagePreview');
+
+        imageLinkInput.addEventListener('input', function () {
+            imagePreview.src = this.value;
+        });
+    });
+</script>
+
+
 </body>
 </html>
