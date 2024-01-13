@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.milosz.booksmanagement.model.book.Kind;
+import pl.milosz.booksmanagement.model.user.User;
 
 @Data
 @AllArgsConstructor
@@ -21,4 +22,5 @@ public class BookDto {
     private String isbn;
     private String language;
     private boolean confirm;
+    private User user;
 }

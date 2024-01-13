@@ -2,6 +2,7 @@ package pl.milosz.booksmanagement.model.book;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.milosz.booksmanagement.model.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +45,9 @@ public class Book {
 
     @Column(name = "confirm", nullable = false)
     private boolean confirm;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
