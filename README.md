@@ -21,8 +21,8 @@ This is a web application built with:
 
 ## Screenshots
 
-### Unlogged view:
-![visit_site](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/6d8d4c78-29d2-45ef-94b5-9af44e0b644b)
+### View for not logged in:
+![visitor](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/c08c1c64-aba1-46e7-b68e-0432baf29c46)
 
 
 ### User view:
