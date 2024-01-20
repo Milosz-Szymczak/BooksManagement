@@ -1,4 +1,11 @@
 # Books Management
+This project aims to store books added by users and use the Google Book API, in order to add books to the database more easily and quickly. Administrator can approve books, modify and delete. The application includes the ability to sing up new user and check their books with inforamation on whether they have been approved by the administrator.
+
+## Table of contents
+* [Technologies](#Technologies)
+* [Functionalities of Book Management App](#Functionalities-of-Book-Management-App)
+* [Setup](#Setup)
+* [Screenshots](#Screenshots)
 
 ## Technologies
 This is a web application built with:
@@ -10,14 +17,30 @@ This is a web application built with:
 * Hibernate
 * PostgreSQL
 * Thymeleaf
+* HTML
+* CSS
+* Bootstrap
 
-## Functionalities of BookSite App
+## Functionalities of Book Management App
 * Login
 * Registration
 * Adding a book
 * Viewing books
 * Adding books with Google Books API
 
+## Setup
+Steps to launch this project.
+```bash
+git clone https://github.com/Milosz-Szymczak/BooksManagement.git
+cd BooksManagement
+./mvnw package
+java -jar target/*.jar
+```
+You can then access the Books Management at http://localhost:8080/.
+
+#### Administrator login details:
+Login: admin <br/>
+Password: password
 
 ## Screenshots
 
