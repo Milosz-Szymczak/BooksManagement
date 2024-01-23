@@ -16,6 +16,8 @@ This is a web application built with:
 * Spring Data JPA
 * Hibernate
 * PostgreSQL
+* JUnit
+* Mockito
 * Thymeleaf
 * HTML
 * CSS
