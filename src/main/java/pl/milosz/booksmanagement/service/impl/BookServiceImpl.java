@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.book.Book;
 import pl.milosz.booksmanagement.model.book.Kind;
+import pl.milosz.booksmanagement.model.user.User;
 import pl.milosz.booksmanagement.repository.BookRepository;
 import pl.milosz.booksmanagement.service.BookService;
 
@@ -32,8 +33,7 @@ class BookServiceImpl implements BookService {
     @Override
     public void saveBook(BookDto bookDto) {
         bookDto.setConfirm(false);
-        Book book = new Book();
-        BeanUtils.copyProperties(bookDto, book);
+        Book book = mapToBook(bookDto);
         bookRepository.save(book);
     }
 
@@ -60,9 +60,7 @@ class BookServiceImpl implements BookService {
         Optional<Book> bookOptional = bookRepository.findById(id);
 
         if (bookOptional.isPresent()) {
-            BookDto bookDto = new BookDto();
-            BeanUtils.copyProperties(bookOptional.get(), bookDto);
-            return bookDto;
+            return mapToBookDto(bookOptional.get());
         } else {
             throw new NoSuchElementException("Book not found with ID: " + id);
         }
@@ -71,8 +69,7 @@ class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void updateBook(Long id, BookDto bookDto) {
-        Book book = new Book();
-        BeanUtils.copyProperties(bookDto, book);
+        Book book = mapToBook(bookDto);
         bookRepository.save(book);
     }
 
@@ -82,16 +79,15 @@ class BookServiceImpl implements BookService {
         BookDto existBookDto = getBookById(id);
         existBookDto.setConfirm(true);
 
-        Book book = new Book();
-        BeanUtils.copyProperties(existBookDto, book);
+        Book book = mapToBook(existBookDto);
         bookRepository.save(book);
     }
 
     @Override
     public void deleteBook(Long id) {
         BookDto bookDtoById = getBookById(id);
-        Book book = new Book();
-        BeanUtils.copyProperties(bookDtoById, book);
+
+        Book book = mapToBook(bookDtoById);
         bookRepository.delete(book);
     }
 
@@ -107,18 +103,35 @@ class BookServiceImpl implements BookService {
     }
 
     private BookDto mapToBookDto(Book book) {
-        BookDto bookDto = new BookDto();
-        bookDto.setId(book.getId());
-        bookDto.setImageLink(book.getImageLink());
-        bookDto.setTitle(book.getTitle());
-        bookDto.setPublisher(book.getPublisher());
-        bookDto.setAuthor(book.getAuthor());
-        bookDto.setKind(book.getKind());
-        bookDto.setReleaseDate(book.getReleaseDate());
-        bookDto.setIsbn(book.getIsbn());
-        bookDto.setLanguage(book.getLanguage());
-        bookDto.setConfirm(book.isConfirm());
-        bookDto.setUser(book.getUser());
-        return bookDto;
+        return BookDto.builder()
+                .id(book.getId())
+                .imageLink(book.getImageLink())
+                .title(book.getTitle())
+                .publisher(book.getPublisher())
+                .author(book.getAuthor())
+                .kind(book.getKind())
+                .releaseDate(book.getReleaseDate())
+                .isbn(book.getIsbn())
+                .language(book.getLanguage())
+                .confirm(book.isConfirm())
+                .user(book.getUser())
+                .build();
     }
+
+    private Book mapToBook(BookDto bookDto) {
+        return Book.builder()
+                .id(bookDto.getId())
+                .imageLink(bookDto.getImageLink())
+                .title(bookDto.getTitle())
+                .publisher(bookDto.getPublisher())
+                .author(bookDto.getAuthor())
+                .kind(bookDto.getKind())
+                .releaseDate(bookDto.getReleaseDate())
+                .isbn(bookDto.getIsbn())
+                .language(bookDto.getLanguage())
+                .confirm(bookDto.isConfirm())
+                .user(bookDto.getUser())
+                .build();
+    }
+
 }
