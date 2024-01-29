@@ -41,8 +41,9 @@
                 <td th:text="${entry.value.isbn}"></td>
                 <td th:text="${entry.value.language}"></td>
                 <td>
-                    <a th:href="@{/googleBooks/{key}(key=${entry.key})}"
-                       class="btn btn-success">Add book</a>
+                    <form th:action="@{/googleBooks/{key}(key=${entry.key})}" method="post">
+                        <button type="submit" class="btn btn-success">Add book</button>
+                    </form>
                 </td>
             </tr>
             </tbody>
