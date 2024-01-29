@@ -3,10 +3,7 @@ package pl.milosz.booksmanagement.controller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.book.Book;
 import pl.milosz.booksmanagement.model.book.Kind;
@@ -14,6 +11,7 @@ import pl.milosz.booksmanagement.service.BookService;
 
 import java.util.List;
 
+@PreAuthorize("hasRole('ADMIN')")
 @Controller
 public class AdminController {
     private final BookService bookService;
@@ -22,7 +20,6 @@ public class AdminController {
         this.bookService = bookService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/adminBookApproval")
     public String getBooksNotConfirm(Model model) {
         List<BookDto> allBook = bookService.getBooksNotConfirm();
@@ -34,14 +31,6 @@ public class AdminController {
         }
         return "admin/adminBookApproval";
     }
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/confirmBook/{id}")
-    public String confirmBook(@PathVariable Long id) {
-        bookService.confirmBook(id);
-        return "redirect:/adminBookApproval";
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/adminManagementBook")
     public String getConfirmBooks(Model model) {
         List<BookDto> allBookDto = bookService.getConfirmBooks();
@@ -54,21 +43,26 @@ public class AdminController {
         return "admin/adminManagementBook";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/confirmBook/{id}")
+    public String confirmBook(@PathVariable Long id) {
+        bookService.confirmBook(id);
+        return "redirect:/adminBookApproval";
+    }
+
     @GetMapping("/updateBook/{id}")
-    public String editBook(@PathVariable Long id, Model model) {
+    public String getFormForUpdateBook(@PathVariable Long id, Model model) {
         model.addAttribute("kind", Kind.values());
         model.addAttribute("book", bookService.getBookById(id));
         return "admin/adminBookUpdate";
     }
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/updateBook/{id}")
+
+    @PatchMapping("/updateBook/{id}")
     public String updateBook(@PathVariable Long id, @ModelAttribute("book") BookDto bookDto) {
         bookService.updateBook(id, bookDto);
         return "redirect:/adminBookApproval";
     }
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/delete/{id}")
+
+    @DeleteMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return "redirect:/adminManagementBook";

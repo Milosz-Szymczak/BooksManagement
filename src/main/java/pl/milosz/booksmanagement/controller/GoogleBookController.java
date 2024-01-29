@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 @Controller
 public class GoogleBookController {
 
@@ -29,19 +30,16 @@ public class GoogleBookController {
         this.userService = userService;
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/searchGoogleBook")
     public String createBookForm() {
         return "user/searchGoogleBook";
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/searchGoogleBook")
     public String redirectToUrl(@RequestParam("title") String title, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("title", title);
         return "redirect:/googleBooks";
     }
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/googleBooks")
     public String getAllGoogleBooks(Model model, @ModelAttribute("title") String title) throws IOException {
         List<BookEntryMapDto> allGoogleBooks = googleBookService.getAllGoogleBooks(title);
@@ -49,14 +47,12 @@ public class GoogleBookController {
         model.addAttribute("bookEntries", allGoogleBooks);
         return "user/googleBooks";
     }
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    @GetMapping("/googleBooks/{key}")
+    @PostMapping("/googleBooks/{key}")
     public String sendGoogleBookToCheck(@PathVariable String key, Model model) {
         BookDto bookDto = googleBookService.sendGoogleBookToCheck(key);
 
         Optional<User> loggedInUser = userService.findLoggedUser();
         loggedInUser.ifPresent(bookDto::setUser);
-
 
         model.addAttribute("book", bookDto);
         model.addAttribute("kind", Kind.values());
