@@ -23,6 +23,7 @@
                     <div class="card-body">
                         <h2 class="mb-4 text-center">Update book</h2>
                         <form th:action="@{/updateBook/{id}(id=${book.id})}" th:object="${book}" method="post">
+                            <input type="hidden" name="_method" value="patch">
 
                             <!-- Image Preview -->
                             <div class="mb-3 text-center">
@@ -88,6 +89,13 @@
                                         class="text-danger">*</span></label>
                                 <input th:field="*{language}" type="text" class="form-control" id="language"
                                        name="language" placeholder="Enter book language" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="user" class="form-label">user id: <span
+                                        class="text-danger">*</span></label>
+                                <input th:field="*{user}" th:text="*{user.getUsername()}" type="text" class="form-control" id="user"
+                                       name="user" placeholder="Enter book language" readonly>
                             </div>
 
                             <div class="d-grid">

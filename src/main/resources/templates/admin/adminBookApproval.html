@@ -26,6 +26,7 @@
             <th> Release Date</th>
             <th> ISBN</th>
             <th> Language</th>
+            <th> User</th>
             <th> Action</th>
         </tr>
         </thead>
@@ -44,13 +45,15 @@
             <td th:text="${book.releaseDate}"></td>
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.language}"></td>
+            <td th:text="${book.user.getUsername()}"></td>
             <td>
-                <a th:href="@{/confirmBook/{id}(id=${book.id})}"
-                   class="btn btn-success">Confirm Book</a>
-                <a th:href="@{/updateBook/{id}(id=${book.id})}"
-                   class="btn btn-warning">Update Book</a>
-                <a th:href="@{/delete/{id}(id=${book.id})}"
-                   class="btn btn-danger">Delete Book</a>
+                <a th:href="@{/confirmBook/{id}(id=${book.id})}" class="btn btn-success">Confirm Book</a>
+                <a th:href="@{/updateBook/{id}(id=${book.id})}" class="btn btn-warning">Update Book</a>
+
+                <form th:action="@{/delete/{id}(id=${book.id})}" method="post">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="btn btn-danger">Delete Book</button>
+                </form>
             </td>
         </tr>
         </tbody>
