@@ -1,6 +1,7 @@
 package pl.milosz.booksmanagement.service;
 
 import pl.milosz.booksmanagement.dto.BookDto;
+import pl.milosz.booksmanagement.model.book.Kind;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface BookService {
     void deleteBook(Long id);
 
     List<BookDto> getBooksAddedByUser(String username);
+
+    List<BookDto> getBooksByKind(Kind kind);
 }

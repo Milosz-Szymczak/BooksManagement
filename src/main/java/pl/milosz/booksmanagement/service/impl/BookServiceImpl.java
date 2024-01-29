@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.milosz.booksmanagement.dto.BookDto;
 import pl.milosz.booksmanagement.model.book.Book;
+import pl.milosz.booksmanagement.model.book.Kind;
 import pl.milosz.booksmanagement.repository.BookRepository;
 import pl.milosz.booksmanagement.service.BookService;
 
@@ -12,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-class BookServiceImpl implements BookService{
+class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
@@ -21,11 +22,18 @@ class BookServiceImpl implements BookService{
         this.bookRepository = bookRepository;
     }
 
+    public List<BookDto> getBooksByKind(Kind kind) {
+        return bookRepository.findAll().stream()
+                .map(this::mapToBookDto)
+                .filter(book -> book.getKind() == kind)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public void saveBook(BookDto bookDto) {
         bookDto.setConfirm(false);
         Book book = new Book();
-        BeanUtils.copyProperties(bookDto,book);
+        BeanUtils.copyProperties(bookDto, book);
         bookRepository.save(book);
     }
 
@@ -34,8 +42,8 @@ class BookServiceImpl implements BookService{
         List<Book> allBooks = bookRepository.getBooksNotConfirm();
 
         return allBooks.stream()
-                        .map(this::mapToBookDto)
-                        .collect(Collectors.toList());
+                .map(this::mapToBookDto)
+                .collect(Collectors.toList());
     }
 
     @Override
