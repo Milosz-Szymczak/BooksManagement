@@ -10,10 +10,32 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 
     <title>Books Management - Admin panel</title>
+
+    <style>
+        #kind{
+            width: 15rem;
+        }
+        .form-group{
+            margin-left: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
 <header th:insert="~{header.html}"></header>
+
 <main>
+    <form th:action="@{/selectKind}" method="get" class="g-3">
+        <div class="form-group">
+            <label for="kind">Choose a Kind:</label>
+            <select id="kind" name="kind" class="form-control">
+                <option th:value="ALL_KINDS">All Kinds</option>
+                <option th:each="kind : ${kinds}" th:value="${kind.name()}" th:text="${kind.getDisplayName()}"></option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
     <div class="container">
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
@@ -49,19 +71,5 @@
         </table>
     </div>
 </main>
-
-    <script>
-        var slider = document.getElementById('ratingSlider');
-
-        slider.addEventListener('input', function(event) {
-            var value = event.target.value;
-            document.getElementById('ratingValue').textContent = value;
-        });
-
-        slider.addEventListener('change', function(event) {
-            event.preventDefault();
-        });
-    </script>
-
 </body>
 </html>
