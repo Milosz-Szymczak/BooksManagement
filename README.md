@@ -28,7 +28,9 @@ This is a web application built with:
 * Registration
 * Adding a book
 * Viewing books
+* Filtering books by kind
 * Adding books with Google Books API
+* Administrator can approve books, modify and delete them
 
 ## Setup
 Steps to launch this project.
@@ -47,7 +49,7 @@ Password: password
 ## Screenshots
 
 ### View for not logged in:
-![visitor](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/c08c1c64-aba1-46e7-b68e-0432baf29c46)
+![visitor](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/2a76293d-ff95-48be-a3cf-0fdf32a736aa)
 
 
 ### User view:
@@ -60,15 +62,16 @@ Password: password
 ![add_book](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/ed249029-fba9-4eee-9100-1a755b8b7949)
 
 ### User profile
-![my_profile](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/29711560-a1f1-49e4-bebb-edfd07d392ff)
+![my_profile](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/db5c5a0e-efc4-4231-83c2-290a6a921530)
 
 
 ### Administrator view:
 
 #### Management Books
-![management_books](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/727c56d0-9c1c-4d14-bedb-ff88d6bf1771)
+![management_books](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/21576014-654f-4659-8466-c5f74c879e95)
 
 
 #### Books to confirm
-![books_to_confirm](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/5481d7e0-92e2-4072-8268-fe4c409c7615)
+![books_to_confirm](https://github.com/Milosz-Szymczak/BooksManagement/assets/99685108/a0d31920-9537-48bb-a3a3-a325681dec6a)
+
 
