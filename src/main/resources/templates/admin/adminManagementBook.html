@@ -47,7 +47,7 @@
             <td th:text="${book.language}"></td>
             <td th:text="${book.user.getUsername()}"></td>
             <td>
-                <a th:href="@{/updateBook/{id}(id=${book.id})}" class="btn btn-warning">Update Book</a>
+                <a th:href="@{/updateBook/{id}(id=${book.id})}" class="btn btn-warning">Update Book</a><br>
                 <form th:action="@{/delete/{id}(id=${book.id})}" th:object="${book}" method="post">
                     <input type="hidden" name="_method" value="delete" />
                     <button type="submit" class="btn btn-danger">Delete Book</button>
