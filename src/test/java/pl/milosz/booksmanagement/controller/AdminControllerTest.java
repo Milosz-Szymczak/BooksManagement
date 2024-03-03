@@ -39,7 +39,7 @@ class AdminControllerTest {
     @BeforeEach
     public void init() {
         bookDto = BookDto.builder().id(1L).title("Clean Code").publisher("Helion").author("Martin Robert C.")
-                .kind(Kind.FANTASY).releaseDate("2009-03-01").isbn("9780132350884L").confirm(false).build();
+                .kind(Kind.FANTASY).releaseDate("2009-03-01").isbn("9780132350884L").confirm(false).user(new User()).build();
     }
     @Test
     void getBooksNotConfirm_ShouldReturnOkStatusWhenListIsNotEmpty() throws Exception {
