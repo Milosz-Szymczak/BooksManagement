@@ -10,17 +10,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.milosz.booksmanagement.dto.BookDto;
-import pl.milosz.booksmanagement.model.book.Book;
 import pl.milosz.booksmanagement.model.book.Kind;
+import pl.milosz.booksmanagement.model.user.User;
 import pl.milosz.booksmanagement.service.BookService;
 
 import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = AdminController.class)
@@ -112,7 +110,7 @@ class AdminControllerTest {
 
         doNothing().when(bookService).updateBook(existBookDto.getId(), updatedBook);
 
-        mockMvc.perform(post("/updateBook/" + existBookDto.getId())
+        mockMvc.perform(patch("/updateBook/" + existBookDto.getId())
                         .flashAttr("book", updatedBook))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/adminBookApproval"));
@@ -123,7 +121,7 @@ class AdminControllerTest {
     void deleteBook_PageShouldRedirectStatus() throws Exception {
         doNothing().when(bookService).deleteBook(bookDto.getId());
 
-        mockMvc.perform(get("/delete/" + bookDto.getId()))
+        mockMvc.perform(delete("/delete/" + bookDto.getId()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/adminManagementBook"));
     }
