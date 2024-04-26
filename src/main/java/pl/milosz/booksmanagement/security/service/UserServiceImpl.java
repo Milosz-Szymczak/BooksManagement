@@ -4,7 +4,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 import pl.milosz.booksmanagement.model.user.User;
 import pl.milosz.booksmanagement.repository.UserRepository;
@@ -20,9 +22,12 @@ class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, InMemoryUserDetailsManager inMemoryUserDetailsManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
     }
 
     @Override
@@ -61,6 +66,13 @@ class UserServiceImpl implements UserService {
                         .role(pl.milosz.booksmanagement.model.user.User.Role.ADMIN)
                         .build();
                 userRepository.save(newAdmin);
+
+                UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
+                        .username(newAdmin.getUsername())
+                        .password(newAdmin.getPassword())
+                        .roles(String.valueOf(newAdmin.getRole()))
+                        .build();
+                inMemoryUserDetailsManager.createUser(userDetails);
             }
         };
     }
