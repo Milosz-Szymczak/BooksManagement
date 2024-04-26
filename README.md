@@ -22,6 +22,7 @@ This is a web application built with:
 * HTML
 * CSS
 * Bootstrap
+* Docker
 
 ## Functionalities of Book Management App
 * Login
@@ -37,8 +38,9 @@ Steps to launch this project.
 ```bash
 git clone https://github.com/Milosz-Szymczak/BooksManagement.git
 cd BooksManagement
-./mvnw package
-java -jar target/*.jar
+mvnw package
+docker-compose build
+docker-compose up
 ```
 You can then access the Books Management at http://localhost:8080/.
 
